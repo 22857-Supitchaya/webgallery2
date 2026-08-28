@@ -1,1746 +1,637 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sweet Candy Gallery 🍭</title>
+    <title>Sweet Candy Gallery 🍭</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600;700;800&display=swap');
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <link
+        href="https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:"Prompt","Segoe UI",sans-serif;
-    color:#633d52;
-    min-height:100vh;
-    overflow-x:hidden;
-
-    background:
-        radial-gradient(circle at 10% 20%,rgba(255,255,255,.75) 0 2px,transparent 3px),
-        radial-gradient(circle at 80% 15%,rgba(255,255,255,.7) 0 3px,transparent 4px),
-        radial-gradient(circle at 30% 80%,rgba(255,255,255,.6) 0 2px,transparent 3px),
-        linear-gradient(135deg,#ffd5e8,#fbc8ed,#dfd0ff,#c9e9ff);
-
-    background-size:
-        auto,
-        auto,
-        auto,
-        400% 400%;
-
-    animation:bgMove 15s ease infinite;
-}
-
-/* ========================================
-   BACKGROUND
-======================================== */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-2;
-
-    background:
-        radial-gradient(circle at 20% 30%,rgba(255,111,180,.25),transparent 25%),
-        radial-gradient(circle at 80% 70%,rgba(173,119,255,.25),transparent 28%),
-        radial-gradient(circle at 50% 10%,rgba(255,255,255,.35),transparent 20%);
-
-    filter:blur(30px);
-    animation:aurora 10s ease-in-out infinite alternate;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:9998;
-
-    background:
-        radial-gradient(
-            circle 180px at var(--mouse-x,50%) var(--mouse-y,50%),
-            rgba(255,255,255,.18),
-            transparent 70%
-        );
-}
-
-@keyframes bgMove{
-    0%,100%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-}
-
-@keyframes aurora{
-    from{transform:translate(-5%,-3%) scale(1)}
-    to{transform:translate(5%,4%) scale(1.15)}
-}
-
-/* ========================================
-   FLOATING CANDIES
-======================================== */
-
-.candy{
-    position:fixed;
-    z-index:0;
-    pointer-events:none;
-
-    font-size:45px;
-
-    filter:
-        drop-shadow(0 10px 10px rgba(150,60,130,.15));
-
-    animation:floatCandy 7s ease-in-out infinite;
-    user-select:none;
-}
-
-.candy:nth-child(1){top:8%;left:4%;font-size:55px}
-.candy:nth-child(2){top:23%;right:6%;animation-delay:1s}
-.candy:nth-child(3){top:52%;left:2%;animation-delay:2s}
-.candy:nth-child(4){top:72%;right:3%;animation-delay:3s}
-.candy:nth-child(5){top:86%;left:12%;animation-delay:4s}
-.candy:nth-child(6){top:44%;right:14%;animation-delay:2.5s}
-.candy:nth-child(7){top:13%;left:45%;animation-delay:1.5s}
-
-@keyframes floatCandy{
-    0%,100%{
-        transform:translateY(0) rotate(-10deg);
-    }
-    50%{
-        transform:translateY(-35px) rotate(15deg);
-    }
-}
-
-/* Extra decorative sweets */
-
-.sweet{
-    position:fixed;
-    pointer-events:none;
-    z-index:0;
-    opacity:.65;
-    animation:spinFloat 12s linear infinite;
-}
-
-.sweet.one{top:35%;left:17%;font-size:24px}
-.sweet.two{top:65%;right:20%;font-size:30px;animation-delay:2s}
-.sweet.three{top:9%;right:28%;font-size:25px;animation-delay:4s}
-.sweet.four{bottom:8%;right:8%;font-size:22px;animation-delay:1s}
-
-@keyframes spinFloat{
-    0%{transform:translateY(0) rotate(0)}
-    50%{transform:translateY(-20px) rotate(180deg)}
-    100%{transform:translateY(0) rotate(360deg)}
-}
-
-/* ========================================
-   CUSTOM CURSOR
-======================================== */
-
-.cursor{
-    position:fixed;
-    width:22px;
-    height:22px;
-    border:2px solid rgba(255,255,255,.95);
-    border-radius:50%;
-    pointer-events:none;
-    z-index:10000;
-
-    transform:translate(-50%,-50%);
-    transition:
-        width .2s,
-        height .2s,
-        background .2s,
-        border .2s;
-
-    mix-blend-mode:difference;
-}
-
-.cursor-dot{
-    position:fixed;
-    width:6px;
-    height:6px;
-    background:white;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:10001;
-    transform:translate(-50%,-50%);
-}
-
-body.cursor-hover .cursor{
-    width:50px;
-    height:50px;
-    background:rgba(255,255,255,.15);
-}
-
-/* ========================================
-   HEADER
-======================================== */
-
-header{
-    position:relative;
-    z-index:2;
-    text-align:center;
-
-    padding:85px 20px 40px;
-}
-
-.badge{
-    display:inline-block;
-
-    padding:11px 27px;
-
-    border-radius:50px;
-
-    color:#e65395;
-    font-weight:700;
-
-    background:rgba(255,255,255,.65);
-
-    border:2px solid rgba(255,255,255,.9);
-
-    box-shadow:
-        0 10px 30px rgba(193,74,139,.15),
-        inset 0 0 20px rgba(255,255,255,.5);
-
-    backdrop-filter:blur(12px);
-
-    animation:badgeFloat 3s ease-in-out infinite;
-}
-
-@keyframes badgeFloat{
-    50%{transform:translateY(-6px)}
-}
-
-header h1{
-    margin:20px 0 12px;
-
-    font-family:"Itim",cursive;
-
-    font-size:clamp(48px,8vw,88px);
-
-    line-height:1.1;
-
-    background:
-        linear-gradient(
-            90deg,
-            #e94891,
-            #bd67d9,
-            #7c8cf5,
-            #e94891
-        );
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-
-    animation:titleGradient 5s linear infinite;
-
-    filter:
-        drop-shadow(3px 5px 0 white)
-        drop-shadow(0 15px 20px rgba(190,70,140,.15));
-}
-
-@keyframes titleGradient{
-    to{background-position:300%}
-}
-
-header p{
-    font-size:19px;
-    color:#81566d;
-}
-
-/* ========================================
-   BANNER
-======================================== */
-
-.banner{
-    position:relative;
-    z-index:2;
-
-    max-width:920px;
-    margin:15px auto 45px;
-
-    padding:20px 35px;
-
-    text-align:center;
-
-    border-radius:60px;
-
-    color:white;
-    font-size:21px;
-    font-weight:700;
-
-    background:
-        linear-gradient(
-            100deg,
-            #ff75ad,
-            #d887e8,
-            #8fa8ff,
-            #ff75ad
-        );
-
-    background-size:300%;
-
-    border:4px solid rgba(255,255,255,.85);
-
-    box-shadow:
-        0 20px 50px rgba(182,73,140,.22),
-        inset 0 0 20px rgba(255,255,255,.2);
-
-    animation:bannerFlow 6s linear infinite;
-}
-
-.banner::before{
-    content:"";
-    position:absolute;
-    inset:4px;
-    border-radius:50px;
-
-    border:1px solid rgba(255,255,255,.5);
-
-    pointer-events:none;
-}
-
-@keyframes bannerFlow{
-    to{background-position:300%}
-}
-
-/* ========================================
-   GALLERY
-======================================== */
-
-.gallery{
-    position:relative;
-    z-index:2;
-
-    max-width:1250px;
-    margin:auto;
-    padding:20px;
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:35px;
-}
-
-/* ========================================
-   CARD
-======================================== */
-
-.card{
-    position:relative;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.94),
-            rgba(255,244,251,.83)
-        );
-
-    border-radius:32px;
-
-    overflow:hidden;
-
-    border:4px solid rgba(255,255,255,.9);
-
-    box-shadow:
-        0 20px 45px rgba(170,75,130,.18),
-        inset 0 0 30px rgba(255,255,255,.5);
-
-    backdrop-filter:blur(15px);
-
-    transform-style:preserve-3d;
-
-    transition:
-        transform .25s ease,
-        box-shadow .3s ease;
-
-    cursor:grab;
-
-    animation:cardAppear .8s both;
-}
-
-.card:nth-child(2){animation-delay:.15s}
-.card:nth-child(3){animation-delay:.3s}
-
-@keyframes cardAppear{
-    from{
-        opacity:0;
-        transform:translateY(40px) scale(.96);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-.card::before{
-    content:"";
-
-    position:absolute;
-    z-index:3;
-
-    width:120px;
-    height:120px;
-
-    top:-70px;
-    left:-70px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.9),
-            transparent 70%
-        );
-
-    transition:.5s;
-}
-
-.card:hover::before{
-    width:300px;
-    height:300px;
-}
-
-.card:hover{
-    box-shadow:
-        0 35px 70px rgba(174,70,137,.28),
-        0 0 35px rgba(255,130,194,.18);
-}
-
-.card.dragging{
-    cursor:grabbing;
-    z-index:50;
-
-    transition:none;
-
-    box-shadow:
-        0 45px 90px rgba(120,50,110,.35),
-        0 0 40px rgba(255,143,202,.4);
-}
-
-/* ========================================
-   HEART
-======================================== */
-
-.heart{
-    position:absolute;
-    z-index:5;
-
-    top:16px;
-    right:16px;
-
-    width:48px;
-    height:48px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:rgba(255,255,255,.82);
-
-    border-radius:50%;
-
-    font-size:23px;
-
-    box-shadow:
-        0 8px 20px rgba(100,40,80,.15);
-
-    backdrop-filter:blur(8px);
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.heart:hover{
-    transform:
-        scale(1.2)
-        rotate(10deg);
-
-    box-shadow:
-        0 0 25px rgba(255,90,170,.45);
-}
-
-/* ========================================
-   IMAGE
-======================================== */
-
-.image-box{
-    height:350px;
-    overflow:hidden;
-    position:relative;
-
-    background:#ffddec;
-}
-
-.image-box::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 35%,
-            rgba(255,255,255,.5) 50%,
-            transparent 65%
-        );
-
-    transform:translateX(-120%);
-
-    transition:1s;
-}
-
-.card:hover .image-box::after{
-    transform:translateX(120%);
-}
-
-.card img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-    display:block;
-
-    transition:
-        transform .8s cubic-bezier(.2,.8,.2,1),
-        filter .5s;
-}
-
-.card:hover img{
-    transform:scale(1.12);
-    filter:saturate(1.12);
-}
-
-/* ========================================
-   CONTENT
-======================================== */
-
-.content{
-    padding:28px 27px 30px;
-    text-align:center;
-}
-
-.number{
-    display:inline-block;
-
-    padding:8px 22px;
-    margin-bottom:15px;
-
-    border-radius:50px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff75ad,
-            #c789ec
-        );
-
-    color:white;
-    font-weight:700;
-
-    box-shadow:
-        0 8px 20px rgba(209,94,155,.2);
-}
-
-.content h2{
-    font-family:"Itim",cursive;
-
-    font-size:30px;
-    color:#df4e90;
-
-    margin-bottom:5px;
-}
-
-.content h3{
-    font-size:15px;
-    color:#b96aa1;
-
-    margin-bottom:15px;
-}
-
-.content p{
-    font-size:14px;
-    line-height:1.9;
-
-    color:#74566a;
-    text-align:left;
-}
-
-/* ========================================
-   BUTTON
-======================================== */
-
-.view-button{
-    position:relative;
-    overflow:hidden;
-
-    border:none;
-
-    margin-top:22px;
-
-    padding:12px 27px;
-
-    border-radius:40px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff67a6,
-            #c678e5
-        );
-
-    color:white;
-
-    font-size:15px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 25px rgba(210,76,145,.25);
-
-    transition:.3s;
-}
-
-.view-button:hover{
-    transform:
-        translateY(-4px)
-        scale(1.05);
-
-    box-shadow:
-        0 16px 35px rgba(210,76,145,.35);
-}
-
-.view-button:active{
-    transform:scale(.94);
-}
-
-/* Ripple */
-
-.ripple{
-    position:absolute;
-
-    border-radius:50%;
-
-    transform:scale(0);
-
-    animation:ripple .6s linear;
-
-    background:rgba(255,255,255,.65);
-
-    pointer-events:none;
-}
-
-@keyframes ripple{
-    to{
-        transform:scale(5);
-        opacity:0;
-    }
-}
-
-/* ========================================
-   INFO
-======================================== */
-
-.info{
-    position:relative;
-    z-index:2;
-
-    max-width:1100px;
-
-    margin:65px auto;
-
-    padding:42px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.82),
-            rgba(255,238,249,.7)
-        );
-
-    border-radius:35px;
-
-    border:4px solid rgba(255,255,255,.9);
-
-    box-shadow:
-        0 25px 55px rgba(170,75,130,.16);
-
-    backdrop-filter:blur(15px);
-
-    text-align:center;
-
-    transition:.4s;
-}
-
-.info:hover{
-    transform:translateY(-6px);
-    box-shadow:
-        0 35px 70px rgba(170,75,130,.22);
-}
-
-.info h2{
-    font-family:"Itim",cursive;
-
-    color:#e84f91;
-    font-size:36px;
-
-    margin-bottom:18px;
-}
-
-.info p{
-    line-height:2;
-    color:#705267;
-    font-size:16px;
-}
-
-.tags{
-    margin-top:25px;
-}
-
-.tag{
-    display:inline-block;
-
-    padding:9px 19px;
-    margin:5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffe0ef,
-            #f2ddff
-        );
-
-    color:#d95391;
-
-    border-radius:30px;
-
-    font-weight:600;
-
-    border:1px solid rgba(255,255,255,.9);
-
-    transition:.3s;
-}
-
-.tag:hover{
-    transform:
-        translateY(-5px)
-        rotate(-2deg)
-        scale(1.05);
-
-    box-shadow:
-        0 10px 20px rgba(200,80,150,.18);
-}
-
-/* ========================================
-   FOOTER
-======================================== */
-
-footer{
-    position:relative;
-    z-index:2;
-
-    margin-top:80px;
-    padding:55px 20px;
-
-    text-align:center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eb6da6,
-            #c488ed,
-            #8ea7f5
-        );
-
-    color:white;
-
-    border-radius:60px 60px 0 0;
-
-    box-shadow:
-        0 -15px 40px rgba(170,80,150,.15);
-}
-
-footer h2{
-    font-family:"Itim",cursive;
-    font-size:35px;
-    margin-bottom:12px;
-}
-
-footer p{
-    margin:7px;
-    opacity:.95;
-}
-
-/* ========================================
-   MODAL
-======================================== */
-
-.modal{
-    display:none;
-
-    position:fixed;
-    z-index:9000;
-
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(150,70,150,.35),
-            rgba(40,15,40,.88)
-        );
-
-    justify-content:center;
-    align-items:center;
-
-    padding:20px;
-
-    backdrop-filter:blur(12px);
-
-    opacity:0;
-}
-
-.modal.active{
-    display:flex;
-    animation:modalIn .35s forwards;
-}
-
-@keyframes modalIn{
-    to{opacity:1}
-}
-
-.modal-content{
-    max-width:900px;
-    max-height:90vh;
-
-    position:relative;
-
-    transform:scale(.75) rotate(-3deg);
-
-    animation:modalPop .45s cubic-bezier(.2,1.4,.4,1) forwards;
-}
-
-@keyframes modalPop{
-    to{
-        transform:scale(1) rotate(0);
-    }
-}
-
-.modal-content img{
-    max-width:100%;
-    max-height:85vh;
-
-    border-radius:25px;
-
-    border:6px solid white;
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.55),
-        0 0 40px rgba(255,150,220,.35);
-}
-
-.close{
-    position:absolute;
-
-    top:-20px;
-    right:-20px;
-
-    width:50px;
-    height:50px;
-
-    border:none;
-    border-radius:50%;
-
-    background:white;
-
-    color:#e84f91;
-
-    font-size:28px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-
-    transition:.3s;
-}
-
-.close:hover{
-    transform:
-        rotate(90deg)
-        scale(1.1);
-}
-
-/* ========================================
-   CLICK PARTICLES
-======================================== */
-
-.click-particle{
-    position:fixed;
-    z-index:10002;
-
-    pointer-events:none;
-
-    font-size:20px;
-
-    animation:particleFly .8s ease-out forwards;
-}
-
-@keyframes particleFly{
-    from{
-        opacity:1;
-        transform:translate(0,0) scale(1);
-    }
-
-    to{
-        opacity:0;
-        transform:
-            translate(
-                var(--x),
-                var(--y)
-            )
-            scale(.2)
-            rotate(180deg);
-    }
-}
-
-/* ========================================
-   SCROLL REVEAL
-======================================== */
-
-.reveal{
-    opacity:0;
-    transform:translateY(35px);
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-}
-
-.reveal.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media(max-width:950px){
-
-    .gallery{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:650px){
-
-    .cursor,
-    .cursor-dot{
-        display:none;
-    }
-
-    header{
-        padding-top:55px;
-    }
-
-    header h1{
-        font-size:48px;
-    }
-
-    header p{
-        font-size:16px;
-    }
-
-    .banner{
-        margin:10px 20px 35px;
-        font-size:17px;
-    }
-
-    .gallery{
-        grid-template-columns:1fr;
-        padding:15px;
-    }
-
-    .image-box{
-        height:330px;
-    }
-
-    .info{
-        margin:45px 20px;
-        padding:28px 22px;
-    }
-
-    .info h2{
-        font-size:29px;
-    }
-
-    .candy{
-        font-size:30px;
-    }
-}
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<body>
-<!-- ========================================
-     🍭 CHOOSE YOUR SWEET INTRO
-======================================== -->
+    <!-- ==================================================
+         🍭 INTRO SCREEN
+    ================================================== -->
 
-<div class="candy-intro" id="candyIntro">
+    <div class="intro" id="intro">
 
-    <div class="intro-glow"></div>
-
-    <div class="intro-particle">✨</div>
-    <div class="intro-particle">💗</div>
-    <div class="intro-particle">🍬</div>
-    <div class="intro-particle">⭐</div>
-    <div class="intro-particle">🍓</div>
-    <div class="intro-particle">🧁</div>
-
-    <div class="intro-content">
-
-        <div class="intro-small">
-            ✨ WELCOME TO MY SWEET WORLD ✨
+        <div class="intro-sparkles">
+            <span>✦</span>
+            <span>✧</span>
+            <span>⋆</span>
+            <span>✦</span>
+            <span>✧</span>
         </div>
 
-        <h1 class="intro-title">
-            Candy Land
-        </h1>
+        <div class="intro-candy candy-left">🍭</div>
+        <div class="intro-candy candy-right">🍬</div>
 
-        <p class="intro-subtitle">
-            🍭 ก่อนเข้าไปชมแกลเลอรี...
-            เลือกขนมที่เป็นตัวแทนของคุณ 🍰
-        </p>
+        <div class="intro-content">
 
-        <div class="sweet-choice">
+            <div class="intro-logo">
+                🍰
+            </div>
 
-            <button
-                class="sweet-option candy-option"
-                onclick="chooseSweet('candy')"
-            >
-                <span class="sweet-icon">🍭</span>
+            <div class="intro-small">
+                WELCOME TO
+            </div>
 
-                <span class="sweet-name">
-                    Candy
-                </span>
+            <h1>
+                Sweet<br>
+                <span>Candy Gallery</span>
+            </h1>
 
-                <span class="sweet-desc">
-                    Sweet & Lovely
-                </span>
-            </button>
+            <p>
+                ✨ A little world full of sweetness ✨
+            </p>
 
-
-            <button
-                class="sweet-option cupcake-option"
-                onclick="chooseSweet('cupcake')"
-            >
-                <span class="sweet-icon">🧁</span>
-
-                <span class="sweet-name">
-                    Cupcake
-                </span>
-
-                <span class="sweet-desc">
-                    Cute & Magical
-                </span>
-            </button>
-
-
-            <button
-                class="sweet-option cake-option"
-                onclick="chooseSweet('cake')"
-            >
-                <span class="sweet-icon">🍰</span>
-
-                <span class="sweet-name">
-                    Cake
-                </span>
-
-                <span class="sweet-desc">
-                    Dreamy & Fancy
-                </span>
+            <button class="enter-button" id="enterButton">
+                <span>🍭</span>
+                Enter Candy World
+                <span>🍬</span>
             </button>
 
         </div>
 
-        <p class="choice-hint">
-            ✨ Choose your sweet ✨
-        </p>
-
-        <button
-            class="skip-intro"
-            onclick="enterCandyLand()"
-        >
-            Skip intro →
-        </button>
+        <div class="intro-floor"></div>
 
     </div>
 
-</div>
-    
-<!-- ========================================
-     FLOATING DECORATIONS
-======================================== -->
 
-<div class="candy">🍭</div>
-<div class="candy">🧁</div>
-<div class="candy">🍩</div>
-<div class="candy">🍰</div>
-<div class="candy">🍬</div>
-<div class="candy">🍪</div>
-<div class="candy">🍓</div>
+    <!-- ==================================================
+         🍬 MAIN WEBSITE
+    ================================================== -->
 
-<div class="sweet one">✨</div>
-<div class="sweet two">💎</div>
-<div class="sweet three">🌸</div>
-<div class="sweet four">✨</div>
+    <main id="mainContent" class="main-content">
 
-<!-- CURSOR -->
+        <!-- Floating candies -->
 
-<div class="cursor"></div>
-<div class="cursor-dot"></div>
+        <div class="floating-candy fc1">🍭</div>
+        <div class="floating-candy fc2">🧁</div>
+        <div class="floating-candy fc3">🍩</div>
+        <div class="floating-candy fc4">🍰</div>
+        <div class="floating-candy fc5">🍬</div>
+        <div class="floating-candy fc6">🍪</div>
+        <div class="floating-candy fc7">🍓</div>
+        <div class="floating-candy fc8">🍫</div>
 
-<!-- ========================================
-     HEADER
-======================================== -->
+        <div class="floating-star fs1">✦</div>
+        <div class="floating-star fs2">✧</div>
+        <div class="floating-star fs3">✦</div>
+        <div class="floating-star fs4">⋆</div>
 
-<header class="reveal">
 
-    <div class="badge">
-        🍰 Welcome to Candy Land 🍰
-    </div>
+        <!-- ==================================================
+             NAVBAR
+        ================================================== -->
 
-    <h1>
-        🍭 แกลเลอรีรูปภาพของฉัน 🍬
-    </h1>
+        <nav class="navbar">
 
-    <p>
-        ✨ โลกแห่งความหวาน กับภาพที่ฉันชื่นชอบ ✨
-    </p>
+            <div class="nav-logo">
+                <span>🍭</span>
+                Sweet Gallery
+            </div>
 
-</header>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+            </div>
 
-<!-- ========================================
-     BANNER
-======================================== -->
+            <button class="theme-open" id="themeOpen">
+                🎨
+                <span>Theme</span>
+            </button>
 
-<div class="banner reveal">
-    💗 รวมภาพที่ฉันชื่นชอบ 3 รูป 💗
-</div>
+        </nav>
 
-<!-- ========================================
-     GALLERY
-======================================== -->
 
-<section class="gallery">
+        <!-- ==================================================
+             HERO
+        ================================================== -->
 
-<!-- CARD 1 -->
+        <section class="hero" id="home">
 
-<div class="card reveal">
+            <div class="hero-content">
 
-    <div class="heart">💗</div>
+                <div class="hero-badge">
+                    🍓 MY SWEET COLLECTION 🍓
+                </div>
 
-    <div class="image-box">
-        <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk__5Y1FBo7kmr_8hbrKw7QVjaktgzf4UgbZBEqyC1LA&s=10"
-            alt="Omniscient Reader's Viewpoint">
-    </div>
+                <h1>
+                    My Little
+                    <span>Candy World</span>
+                </h1>
 
-    <div class="content">
+                <p>
+                    ยินดีต้อนรับเข้าสู่โลกแห่งความหวาน
+                    <br>
+                    ที่รวบรวมภาพที่ฉันชื่นชอบเอาไว้ 💗
+                </p>
 
-        <div class="number">
-            🍰 ภาพที่ 1
+                <a href="#gallery" class="hero-button">
+                    Explore Gallery
+                    <span>↓</span>
+                </a>
+
+            </div>
+
+            <div class="hero-decoration">
+
+                <div class="orbit orbit-one">
+                    <span>🍭</span>
+                </div>
+
+                <div class="orbit orbit-two">
+                    <span>🍬</span>
+                </div>
+
+                <div class="hero-cake">
+                    🍰
+                </div>
+
+                <div class="hero-glow"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             MARQUEE
+        ================================================== -->
+
+        <div class="marquee">
+
+            <div class="marquee-track">
+
+                <span>🍭 SWEET MEMORIES</span>
+                <span>✦</span>
+                <span>🍰 MY FAVORITE THINGS</span>
+                <span>✦</span>
+                <span>🍬 CANDY WORLD</span>
+                <span>✦</span>
+                <span>🍓 SWEET MEMORIES</span>
+                <span>✦</span>
+
+                <span>🍭 SWEET MEMORIES</span>
+                <span>✦</span>
+                <span>🍰 MY FAVORITE THINGS</span>
+                <span>✦</span>
+                <span>🍬 CANDY WORLD</span>
+                <span>✦</span>
+
+            </div>
+
         </div>
 
-        <h2>
-            Omniscient Reader's Viewpoint
-        </h2>
 
-        <h3>
-            📖 มุมมองนักอ่านพระเจ้า
-        </h3>
+        <!-- ==================================================
+             GALLERY
+        ================================================== -->
 
-        <p>
-            ภาพนี้มาจากเรื่อง
-            <b>Omniscient Reader's Viewpoint</b>
-            หรือเรียกสั้น ๆ ว่า <b>ORV</b>
+        <section class="gallery-section" id="gallery">
 
-            เรื่องราวเกี่ยวกับ
-            <b>คิมดกจา (Kim Dokja)</b>
+            <div class="section-heading">
 
-            ชายหนุ่มธรรมดาที่อ่านนิยายเรื่องหนึ่ง
-            จนจบเพียงคนเดียว
+                <div class="heading-label">
+                    ✦ MY COLLECTION ✦
+                </div>
 
-            แต่วันหนึ่งโลกในนิยาย
-            กลับกลายเป็นความจริง
+                <h2>
+                    Sweet <span>Gallery</span>
+                </h2>
 
-            เขาจึงต้องใช้ความรู้จากนิยาย
-            เพื่อเอาชีวิตรอด
-            และเปลี่ยนแปลงเรื่องราว
-        </p>
+                <p>
+                    3 ภาพที่ฉันชื่นชอบและอยากแบ่งปัน 🍭
+                </p>
 
-        <button class="view-button" onclick="openImage(this)">
-            🍭 ดูรูปใหญ่
-        </button>
+            </div>
 
-    </div>
 
-</div>
+            <div class="gallery-grid">
 
-<!-- CARD 2 -->
 
-<div class="card reveal">
+                <!-- ================= CARD 1 ================= -->
 
-    <div class="heart">🍓</div>
+                <article class="card">
 
-    <div class="image-box">
-        <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2LDrC0tpvYwP2F12CIMpZA9yhdQUQXBuYRsR-Y8glw&s=10"
-            alt="KimCom">
-    </div>
+                    <div class="card-number">
+                        01
+                    </div>
 
-    <div class="content">
+                    <button class="heart" aria-label="favorite">
+                        ♡
+                    </button>
 
-        <div class="number">
-            🧁 ภาพที่ 2
+                    <div class="image-box">
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk__5Y1FBo7kmr_8hbrKw7QVjaktgzf4UgbZBEqyC1LA&s=10"
+                            alt="Omniscient Reader's Viewpoint">
+
+                        <div class="image-overlay">
+                            <span>✦</span>
+                            <span>✧</span>
+                            <span>⋆</span>
+                        </div>
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <div class="card-tag">
+                            📖 NOVEL / MANHWA
+                        </div>
+
+                        <h3>
+                            Omniscient Reader's
+                            Viewpoint
+                        </h3>
+
+                        <h4>
+                            📚 มุมมองนักอ่านพระเจ้า
+                        </h4>
+
+                        <p>
+                            เรื่องราวของ
+                            <b>คิมดกจา</b>
+                            ชายหนุ่มธรรมดาที่อ่านนิยาย
+                            เรื่องหนึ่งจนจบเพียงคนเดียว
+                            ก่อนที่โลกในนิยายจะกลายเป็นความจริง
+                            และเขาต้องใช้ความรู้จากนิยาย
+                            เพื่อเอาชีวิตรอด
+                        </p>
+
+                        <button class="view-button">
+                            View Memory
+                            <span>↗</span>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ================= CARD 2 ================= -->
+
+                <article class="card">
+
+                    <div class="card-number">
+                        02
+                    </div>
+
+                    <button class="heart" aria-label="favorite">
+                        ♡
+                    </button>
+
+                    <div class="image-box">
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2LDrC0tpvYwP2F12CIMpZA9yhdQUQXBuYRsR-Y8glw&s=10"
+                            alt="KimCompany">
+
+                        <div class="image-overlay">
+                            <span>✦</span>
+                            <span>✧</span>
+                            <span>⋆</span>
+                        </div>
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <div class="card-tag">
+                            🍓 FAN ART
+                        </div>
+
+                        <h3>
+                            KimCompany
+                        </h3>
+
+                        <h4>
+                            🍓 ภาพแฟนอาร์ต
+                        </h4>
+
+                        <p>
+                            ภาพที่เกี่ยวข้องกับ
+                            <b>KimCom</b>
+                            ซึ่งเป็นชื่อที่แฟน ๆ ใช้เรียก
+                            กลุ่มตัวละครจากเรื่อง
+                            <b>Omniscient Reader's Viewpoint</b>
+                            ในบรรยากาศที่อบอุ่น
+                            และแตกต่างจากฉากการต่อสู้
+                        </p>
+
+                        <button class="view-button">
+                            View Memory
+                            <span>↗</span>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ================= CARD 3 ================= -->
+
+                <article class="card">
+
+                    <div class="card-number">
+                        03
+                    </div>
+
+                    <button class="heart" aria-label="favorite">
+                        ♡
+                    </button>
+
+                    <div class="image-box">
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch4rcDVeznx3HSs-SfvYa4FyrTtuZsjEWS-q5qDw0oIfUNezxNkCnnvXi&s=10"
+                            alt="Oldest Dream">
+
+                        <div class="image-overlay">
+                            <span>✦</span>
+                            <span>✧</span>
+                            <span>⋆</span>
+                        </div>
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <div class="card-tag">
+                            🌌 OMNISCIENT READER
+                        </div>
+
+                        <h3>
+                            Oldest Dream
+                        </h3>
+
+                        <h4>
+                            🌌 ความฝันที่เก่าแก่ที่สุด
+                        </h4>
+
+                        <p>
+                            หนึ่งในแนวคิดสำคัญของเรื่อง
+                            <b>Omniscient Reader's Viewpoint</b>
+                            ผู้ที่มีบทบาทต่อเรื่องราวทั้งหมด
+                            และเป็นส่วนสำคัญของการดำเนินเรื่อง
+                            ที่เชื่อมโยงระหว่างผู้อ่าน
+                            ตัวละคร และเรื่องราว
+                        </p>
+
+                        <button class="view-button">
+                            View Memory
+                            <span>↗</span>
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             ABOUT
+        ================================================== -->
+
+        <section class="about-section" id="about">
+
+            <div class="about-card">
+
+                <div class="about-candy">
+                    🍰
+                </div>
+
+                <div class="about-text">
+
+                    <div class="heading-label">
+                        ✦ ABOUT THIS WORLD ✦
+                    </div>
+
+                    <h2>
+                        A Story Told
+                        <span>Through Pictures</span>
+                    </h2>
+
+                    <p>
+                        เว็บไซต์นี้สร้างขึ้นเพื่อรวบรวม
+                        ภาพที่ฉันชื่นชอบจากเรื่องราวต่าง ๆ
+                        โดยใช้ธีมโลกขนมหวาน
+                        เพื่อทำให้แกลเลอรีดูสนุก
+                        และมีเอกลักษณ์มากขึ้น
+                    </p>
+
+                    <div class="tags">
+
+                        <span>📖 Fantasy</span>
+                        <span>🌌 Adventure</span>
+                        <span>⚔️ Survival</span>
+                        <span>🍭 Candy</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             FOOTER
+        ================================================== -->
+
+        <footer>
+
+            <div class="footer-candy">
+                🍭
+            </div>
+
+            <h2>
+                Sweet Memories
+            </h2>
+
+            <p>
+                บางภาพอาจเป็นเพียงรูปภาพ
+                แต่สำหรับฉัน
+                มันคือความทรงจำที่มีความหมาย 💗
+            </p>
+
+            <div class="footer-line"></div>
+
+            <small>
+                © 2026 Sweet Candy Gallery
+                · Created with 🍰 & ✨
+            </small>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ==================================================
+         🎨 THEME PANEL
+    ================================================== -->
+
+    <div class="theme-panel" id="themePanel">
+
+        <div class="theme-box">
+
+            <button class="theme-close" id="themeClose">
+                ×
+            </button>
+
+            <div class="theme-title">
+                <span>🎨</span>
+
+                <div>
+                    <small>CHOOSE YOUR</small>
+                    <h2>Candy Theme</h2>
+                </div>
+            </div>
+
+            <p>
+                เลือกขนมที่อยากให้เป็นธีมของเว็บไซต์ 🍭
+            </p>
+
+            <div class="theme-options">
+
+                <button
+                    class="theme-option active"
+                    data-theme="strawberry">
+
+                    <span class="theme-icon">
+                        🍓
+                    </span>
+
+                    <span>
+                        Strawberry
+                        <small>หวานอมชมพู</small>
+                    </span>
+
+                </button>
+
+                <button
+                    class="theme-option"
+                    data-theme="blueberry">
+
+                    <span class="theme-icon">
+                        🫐
+                    </span>
+
+                    <span>
+                        Blueberry
+                        <small>เย็นสดใส</small>
+                    </span>
+
+                </button>
+
+                <button
+                    class="theme-option"
+                    data-theme="chocolate">
+
+                    <span class="theme-icon">
+                        🍫
+                    </span>
+
+                    <span>
+                        Chocolate
+                        <small>หวานเข้ม</small>
+                    </span>
+
+                </button>
+
+                <button
+                    class="theme-option"
+                    data-theme="lemon">
+
+                    <span class="theme-icon">
+                        🍋
+                    </span>
+
+                    <span>
+                        Lemon
+                        <small>สดชื่นซ่า ๆ</small>
+                    </span>
+
+                </button>
+
+                <button
+                    class="theme-option"
+                    data-theme="cotton">
+
+                    <span class="theme-icon">
+                        🍬
+                    </span>
+
+                    <span>
+                        Cotton Candy
+                        <small>ฟูนุ่มละมุน</small>
+                    </span>
+
+                </button>
+
+            </div>
+
         </div>
 
-        <h2>
-            KimCompany
-        </h2>
-
-        <h3>
-            🍓 ภาพแฟนอาร์ต
-        </h3>
-
-        <p>
-            ภาพนี้เป็นภาพที่เกี่ยวข้องกับ
-            <b>KimCom</b>
-
-            ซึ่งเป็นชื่อที่แฟน ๆ ใช้เรียก
-            ความสัมพันธ์และกลุ่มตัวละคร
-            จากเรื่อง
-            <b>Omniscient Reader's Viewpoint</b>
-
-            ภาพมีบรรยากาศอบอุ่น
-            และแตกต่างจากฉากการต่อสู้
-            ในเรื่อง
-        </p>
-
-        <button class="view-button" onclick="openImage(this)">
-            🍩 ดูรูปใหญ่
-        </button>
-
     </div>
 
-</div>
 
-<!-- CARD 3 -->
+    <!-- ==================================================
+         🖼️ IMAGE MODAL
+    ================================================== -->
 
-<div class="card reveal">
+    <div class="image-modal" id="imageModal">
 
-    <div class="heart">💜</div>
-
-    <div class="image-box">
-        <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSch4rcDVeznx3HSs-SfvYa4FyrTtuZsjEWS-q5qDw0oIfUNezxNkCnnvXi&s=10"
-            alt="Kim Dokja">
-    </div>
-
-    <div class="content">
-
-        <div class="number">
-            🍪 ภาพที่ 3
-        </div>
-
-        <h2>
-            Oldest Dream
-        </h2>
-
-        <h3>
-            🌌 Omniscient Reader's Viewpoint
-        </h3>
-
-        <p>
-            ภาพนี้เป็นภาพของ
-            <b>ความฝันที่เก่าแก่ที่สุด (Oldest Dream)</b>
-
-            ตัวละครสำคัญของเรื่องราวทั้งหมด
-
-            ผู้ที่ฝันเพื่อให้เรื่องราวดำเนิน
-            Kim Dokja ในร่างของเด็กชาย
-            ผู้ที่มีพลังในการขับเคลื่อนเรื่องราวทั้งหมด
-            เพื่อให้คนทั้งโลกยังมีชีวิตรอด
-        </p>
-
-        <button class="view-button" onclick="openImage(this)">
-            🍬 ดูรูปใหญ่
-        </button>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- ========================================
-     INFO
-======================================== -->
-
-<section class="info reveal">
-
-    <h2>
-        📚 เกี่ยวกับ Omniscient Reader's Viewpoint
-    </h2>
-
-    <p>
-        <b>Omniscient Reader's Viewpoint</b>
-
-        เป็นเรื่องราวแนวแฟนตาซี
-        และการเอาชีวิตรอด
-
-        มีแนวคิดเกี่ยวกับ
-        “นิยายที่กลายเป็นความจริง”
-
-        ตัวละครหลักอย่าง
-        <b>คิมดกจา</b>
-
-        ต้องนำความรู้จากเรื่องที่เขาเคยอ่าน
-        มาใช้รับมือกับสถานการณ์ต่าง ๆ
-
-        จุดที่น่าสนใจคือความสัมพันธ์ระหว่าง
-        “ผู้อ่าน”
-        “ตัวละคร”
-        และ
-        “เรื่องราว”
-
-        ที่ค่อย ๆ เชื่อมโยงเข้าด้วยกัน
-    </p>
-
-    <div class="tags">
-
-        <span class="tag">📖 นักอ่าน</span>
-        <span class="tag">🌌 แฟนตาซี</span>
-        <span class="tag">⚔️ เอาชีวิตรอด</span>
-        <span class="tag">✨ โลกในนิยาย</span>
-        <span class="tag">🍭 Candy Theme</span>
-
-    </div>
-
-</section>
-
-<!-- ========================================
-     FOOTER
-======================================== -->
-
-<footer>
-
-    <h2>
-        🍰 Sweet Memories 🍰
-    </h2>
-
-    <p>
-        บางภาพอาจเป็นเพียงรูปภาพ
-        แต่สำหรับฉัน
-        มันคือความทรงจำที่มีความหมาย 💗
-    </p>
-
-    <p>
-        © 2026 แกลเลอรีรูปภาพของฉัน
-    </p>
-
-    <p>
-        🌸 สร้างสรรค์โดยนักเรียน 🌸
-    </p>
-
-</footer>
-
-<!-- ========================================
-     MODAL
-======================================== -->
-
-<div class="modal" id="imageModal" onclick="closeImage()">
-
-    <div class="modal-content" onclick="event.stopPropagation()">
-
-        <button class="close" onclick="closeImage()">
+        <button class="modal-close" id="modalClose">
             ×
         </button>
 
-        <img
-            id="largeImage"
-            src=""
-            alt="รูปภาพขนาดใหญ่">
+        <div class="modal-inner">
+
+            <div class="modal-image-wrap">
+                <img id="largeImage" src="" alt="">
+            </div>
+
+            <div class="modal-caption">
+
+                <span>✦ SWEET MEMORY ✦</span>
+
+                <h3 id="modalTitle">
+                    Sweet Memory
+                </h3>
+
+            </div>
+
+        </div>
+
     </div>
 
-</div>
 
-<script>
+    <!-- Cursor -->
 
-/* ========================================
-   IMAGE MODAL
-======================================== */
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
 
-function openImage(button){
-
-    const card = button.closest(".card");
-
-    const image = card.querySelector("img");
-
-    const modal = document.getElementById("imageModal");
-
-    const largeImage = document.getElementById("largeImage");
-
-    largeImage.src = image.src;
-
-    modal.classList.add("active");
-}
-
-function closeImage(){
-
-    const modal = document.getElementById("imageModal");
-
-    modal.classList.remove("active");
-}
-
-document.addEventListener("keydown",function(event){
-
-    if(event.key === "Escape"){
-        closeImage();
-    }
-
-});
-
-/* ========================================
-   CUSTOM CURSOR
-======================================== */
-
-const cursor = document.querySelector(".cursor");
-const cursorDot = document.querySelector(".cursor-dot");
-
-document.addEventListener("mousemove",function(e){
-
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-
-    cursorDot.style.left = e.clientX + "px";
-    cursorDot.style.top = e.clientY + "px";
-
-    document.documentElement.style.setProperty(
-        "--mouse-x",
-        e.clientX + "px"
-    );
-
-    document.documentElement.style.setProperty(
-        "--mouse-y",
-        e.clientY + "px"
-    );
-});
-
-/* Cursor hover */
-
-document.querySelectorAll(
-    "button,.heart,.tag,.card"
-).forEach(element=>{
-
-    element.addEventListener("mouseenter",()=>{
-        document.body.classList.add("cursor-hover");
-    });
-
-    element.addEventListener("mouseleave",()=>{
-        document.body.classList.remove("cursor-hover");
-    });
-
-});
-
-/* ========================================
-   CLICK PARTICLES
-======================================== */
-
-document.addEventListener("click",function(e){
-
-    const symbols=[
-        "✨",
-        "💗",
-        "💖",
-        "🍭",
-        "🧁",
-        "⭐"
-    ];
-
-    for(let i=0;i<8;i++){
-
-        const particle=document.createElement("div");
-
-        particle.className="click-particle";
-
-        particle.textContent=
-            symbols[Math.floor(Math.random()*symbols.length)];
-
-        particle.style.left=e.clientX+"px";
-        particle.style.top=e.clientY+"px";
-
-        particle.style.setProperty(
-            "--x",
-            (Math.random()*160-80)+"px"
-        );
-
-        particle.style.setProperty(
-            "--y",
-            (Math.random()*160-100)+"px"
-        );
-
-        document.body.appendChild(particle);
-
-        setTimeout(()=>{
-            particle.remove();
-        },800);
-    }
-
-});
-
-/* ========================================
-   BUTTON RIPPLE
-======================================== */
-
-document.querySelectorAll(".view-button").forEach(button=>{
-
-    button.addEventListener("click",function(e){
-
-        const ripple=document.createElement("span");
-
-        ripple.className="ripple";
-
-        const rect=button.getBoundingClientRect();
-
-        const size=Math.max(
-            rect.width,
-            rect.height
-        );
-
-        ripple.style.width=size+"px";
-        ripple.style.height=size+"px";
-
-        ripple.style.left=
-            (e.clientX-rect.left-size/2)+"px";
-
-        ripple.style.top=
-            (e.clientY-rect.top-size/2)+"px";
-
-        button.appendChild(ripple);
-
-        setTimeout(()=>{
-            ripple.remove();
-        },600);
-
-    });
-
-});
-
-/* ========================================
-   CARD 3D TILT
-======================================== */
-
-document.querySelectorAll(".card").forEach(card=>{
-
-    card.addEventListener("mousemove",function(e){
-
-        if(card.classList.contains("dragging")) return;
-
-        const rect=card.getBoundingClientRect();
-
-        const x=e.clientX-rect.left;
-        const y=e.clientY-rect.top;
-
-        const rotateY=
-            ((x/rect.width)-.5)*10;
-
-        const rotateX=
-            ((y/rect.height)-.5)*-10;
-
-        card.style.transform=
-            `perspective(1000px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-8px)`;
-    });
-
-    card.addEventListener("mouseleave",function(){
-
-        if(card.classList.contains("dragging")) return;
-
-        card.style.transform="";
-    });
-
-});
-
-/* ========================================
-   DRAG CARD
-======================================== */
-
-let activeCard=null;
-let offsetX=0;
-let offsetY=0;
-
-document.querySelectorAll(".card").forEach(card=>{
-
-    card.addEventListener("pointerdown",function(e){
-
-        if(
-            e.target.closest("button") ||
-            e.target.closest(".heart") ||
-            e.target.tagName==="IMG"
-        ){
-            return;
-        }
-
-        activeCard=card;
-
-        const rect=card.getBoundingClientRect();
-
-        offsetX=e.clientX-rect.left;
-        offsetY=e.clientY-rect.top;
-
-        card.classList.add("dragging");
-
-        card.style.position="relative";
-
-        card.setPointerCapture(e.pointerId);
-
-    });
-
-    card.addEventListener("pointermove",function(e){
-
-        if(activeCard!==card) return;
-
-        const x=e.clientX-offsetX;
-        const y=e.clientY-offsetY;
-
-        const parent=card.parentElement.getBoundingClientRect();
-
-        const current=card.getBoundingClientRect();
-
-        let moveX=
-            x-parent.left;
-
-        let moveY=
-            y-parent.top;
-
-        moveX=Math.max(
-            -100,
-            Math.min(
-                100,
-                moveX-(current.left-parent.left)
-            )
-        );
-
-        moveY=Math.max(
-            -80,
-            Math.min(
-                80,
-                moveY-(current.top-parent.top)
-            )
-        );
-
-        card.style.transform=
-            `translate(${moveX}px,${moveY}px)
-             rotate(${moveX/12}deg)
-             scale(1.03)`;
-    });
-
-    card.addEventListener("pointerup",function(){
-
-        activeCard=null;
-
-        card.classList.remove("dragging");
-
-        setTimeout(()=>{
-            card.style.transform="";
-        },300);
-
-    });
-
-});
-
-/* ========================================
-   SCROLL REVEAL
-======================================== */
-
-const observer=new IntersectionObserver(
-    entries=>{
-
-        entries.forEach(entry=>{
-
-            if(entry.isIntersecting){
-
-                entry.target.classList.add("show");
-
-                observer.unobserve(entry.target);
-            }
-
-        });
-
-    },
-    {
-        threshold:.15
-    }
-);
-
-document.querySelectorAll(".reveal").forEach(element=>{
-    observer.observe(element);
-});
-
-/* ========================================
-   HEART CLICK
-======================================== */
-
-document.querySelectorAll(".heart").forEach(heart=>{
-
-    heart.addEventListener("click",function(e){
-
-        e.stopPropagation();
-
-        heart.animate(
-            [
-                {
-                    transform:"scale(1)"
-                },
-                {
-                    transform:"scale(1.5) rotate(15deg)"
-                },
-                {
-                    transform:"scale(1)"
-                }
-            ],
-            {
-                duration:500,
-                easing:"cubic-bezier(.2,1.5,.4,1)"
-            }
-        );
-
-    });
-
-});
-
-</script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
