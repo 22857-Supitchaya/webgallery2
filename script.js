@@ -1,115 +1,121 @@
 /* ========================================
-   🍭 CANDY LAND INTRO
+   🍭 SWEET CHOICE SYSTEM
 ======================================== */
 
 const candyIntro =
     document.getElementById("candyIntro");
 
 
-function enterCandyLand(){
-
-    if(candyIntro.classList.contains("exit")){
-        return;
-    }
-
-    candyIntro.classList.add("exit");
-
-    /*
-        ปล่อยให้ animation ระเบิด
-        ทำงานก่อน แล้วค่อยซ่อน
-    */
-
-    setTimeout(()=>{
-
-        candyIntro.classList.add("hide");
-
-    },1000);
-
-}
+let chosenSweet = null;
 
 
-/* ========================================
-   AUTO ENTER
-======================================== */
+function chooseSweet(type){
 
-/*
-   ถ้าไม่กดอะไรเลย
-   หลังจาก 7 วินาทีจะเข้าเว็บอัตโนมัติ
-*/
+    if(chosenSweet) return;
 
-setTimeout(()=>{
+    chosenSweet = type;
 
-    if(
-        candyIntro &&
-        !candyIntro.classList.contains("hide")
-    ){
+    const option =
+        document.querySelector(
+            "." + type + "-option"
+        );
 
-        enterCandyLand();
+    candyIntro.classList.add("choosing");
 
-    }
-
-},7000);
+    option.classList.add("selected");
 
 
-/* ========================================
-   INTRO CLICK PARTICLES
-======================================== */
+    /* ====================================
+       CHANGE ENTIRE WORLD THEME
+    ==================================== */
 
-candyIntro.addEventListener(
-    "click",
-    function(e){
+    document.body.dataset.sweet = type;
 
-        const sweets = [
+
+    /* ====================================
+       EXTRA PARTICLES
+    ==================================== */
+
+    let symbols;
+
+    if(type === "candy"){
+
+        symbols = [
             "🍭",
+            "💗",
+            "💖",
             "🍬",
+            "🍓",
+            "✨"
+        ];
+
+    }
+
+    else if(type === "cupcake"){
+
+        symbols = [
             "🧁",
-            "🍩",
+            "💜",
+            "✨",
+            "⭐",
+            "🌸",
+            "🍬"
+        ];
+
+    }
+
+    else{
+
+        symbols = [
             "🍰",
             "🍓",
             "✨",
-            "💗"
+            "💎",
+            "💗",
+            "⭐"
         ];
 
-        for(let i=0;i<14;i++){
+    }
 
-            const particle =
-                document.createElement("div");
 
-            particle.className =
-                "click-particle";
+    for(let i=0;i<35;i++){
 
-            particle.textContent =
-                sweets[
-                    Math.floor(
-                        Math.random()*sweets.length
-                    )
-                ];
+        const particle =
+            document.createElement("div");
 
-            particle.style.left =
-                e.clientX + "px";
+        particle.className =
+            "click-particle";
 
-            particle.style.top =
-                e.clientY + "px";
+        particle.textContent =
+            symbols[
+                Math.floor(
+                    Math.random()*symbols.length
+                )
+            ];
 
-            particle.style.setProperty(
-                "--x",
-                (Math.random()*300-150)+"px"
-            );
+        particle.style.left =
+            "50%";
 
-            particle.style.setProperty(
-                "--y",
-                (Math.random()*300-150)+"px"
-            );
+        particle.style.top =
+            "50%";
 
-            candyIntro.appendChild(particle);
+        particle.style.setProperty(
+            "--x",
+            (Math.random()*700-350)+"px"
+        );
 
-            setTimeout(()=>{
+        particle.style.setProperty(
+            "--y",
+            (Math.random()*700-350)+"px"
+        );
 
-                particle.remove();
+        candyIntro.appendChild(particle);
 
-            },800);
 
-        }
+        setTimeout(()=>{
+
+            particle.remove();
+
+        },900);
 
     }
-);
