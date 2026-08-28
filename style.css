@@ -690,3 +690,475 @@
     }
 
 }
+
+/* ========================================
+   🍭 SWEET CHOICE
+======================================== */
+
+.sweet-choice{
+
+    position:relative;
+
+    z-index:20;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:22px;
+
+    margin:35px auto 20px;
+
+    max-width:850px;
+
+}
+
+
+/* ========================================
+   SWEET OPTION
+======================================== */
+
+.sweet-option{
+
+    position:relative;
+
+    width:190px;
+    min-height:220px;
+
+    border:none;
+
+    border-radius:35px;
+
+    padding:25px 15px;
+
+    cursor:pointer;
+
+    font-family:"Prompt",sans-serif;
+
+    color:#713f68;
+
+    background:
+        rgba(255,255,255,.72);
+
+    border:3px solid
+        rgba(255,255,255,.9);
+
+    box-shadow:
+
+        0 20px 45px
+        rgba(100,40,100,.16),
+
+        inset 0 0 25px
+        rgba(255,255,255,.65);
+
+    backdrop-filter:blur(15px);
+
+    transition:
+
+        transform .35s
+        cubic-bezier(.2,1.5,.4,1),
+
+        box-shadow .35s,
+
+        background .35s;
+
+    overflow:hidden;
+
+}
+
+
+/* shine */
+
+.sweet-option::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+    height:250px;
+
+    top:-40px;
+    left:-120px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.7),
+            transparent
+        );
+
+    transform:rotate(20deg);
+
+    transition:.6s;
+
+}
+
+.sweet-option:hover::before{
+
+    left:220px;
+
+}
+
+
+/* hover */
+
+.sweet-option:hover{
+
+    transform:
+        translateY(-18px)
+        rotate(-2deg)
+        scale(1.06);
+
+    box-shadow:
+
+        0 30px 65px
+        rgba(130,50,120,.28),
+
+        0 0 35px
+        rgba(255,150,220,.45);
+
+}
+
+
+/* ========================================
+   SWEET ICON
+======================================== */
+
+.sweet-icon{
+
+    display:block;
+
+    font-size:85px;
+
+    margin-bottom:10px;
+
+    filter:
+        drop-shadow(
+            0 12px 8px
+            rgba(100,40,100,.2)
+        );
+
+    transition:.4s;
+
+}
+
+.sweet-option:hover .sweet-icon{
+
+    transform:
+        scale(1.2)
+        rotate(8deg);
+
+}
+
+
+/* ========================================
+   SWEET TEXT
+======================================== */
+
+.sweet-name{
+
+    display:block;
+
+    font-family:"Itim",cursive;
+
+    font-size:27px;
+
+    color:#dd5797;
+
+}
+
+.sweet-desc{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#89647f;
+
+    margin-top:3px;
+
+}
+
+
+/* ========================================
+   INDIVIDUAL THEMES
+======================================== */
+
+.candy-option:hover{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,220,239,.95),
+            rgba(255,190,220,.85)
+        );
+
+}
+
+.cupcake-option:hover{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(237,220,255,.95),
+            rgba(211,193,255,.85)
+        );
+
+}
+
+.cake-option:hover{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(220,242,255,.95),
+            rgba(255,220,239,.85)
+        );
+
+}
+
+
+/* ========================================
+   CHOICE HINT
+======================================== */
+
+.choice-hint{
+
+    margin-top:12px;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-shadow:
+        0 3px 10px
+        rgba(100,40,100,.25);
+
+    animation:
+        hintPulse 2s
+        ease-in-out infinite;
+
+}
+
+@keyframes hintPulse{
+
+    0%,100%{
+        opacity:.65;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+}
+
+
+/* ========================================
+   SELECTED EFFECT
+======================================== */
+
+.sweet-option.selected{
+
+    transform:
+        scale(1.15)
+        translateY(-10px);
+
+    box-shadow:
+
+        0 0 0 7px
+        rgba(255,255,255,.65),
+
+        0 0 70px
+        rgba(255,255,255,.9);
+
+}
+
+
+/* Other cards disappear */
+
+.candy-intro.choosing
+.sweet-option:not(.selected){
+
+    opacity:0;
+
+    transform:
+        scale(.6)
+        translateY(50px);
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media(max-width:650px){
+
+    .sweet-choice{
+
+        gap:10px;
+
+        padding:0 8px;
+
+    }
+
+    .sweet-option{
+
+        width:31vw;
+
+        min-height:170px;
+
+        padding:18px 5px;
+
+        border-radius:25px;
+
+    }
+
+    .sweet-icon{
+
+        font-size:55px;
+
+    }
+
+    .sweet-name{
+
+        font-size:21px;
+
+    }
+
+    .sweet-desc{
+
+        font-size:10px;
+
+    }
+
+}
+
+/* ========================================
+   🍭 SWEET WORLD THEMES
+======================================== */
+
+
+/* CANDY */
+
+body[data-sweet="candy"]{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd5e8,
+            #fbc8ed,
+            #dfd0ff,
+            #ffc9e4
+        );
+
+}
+
+body[data-sweet="candy"] .banner{
+
+    background:
+        linear-gradient(
+            100deg,
+            #ff75ad,
+            #e887c9,
+            #c679e8,
+            #ff75ad
+        );
+
+}
+
+
+/* CUPCAKE */
+
+body[data-sweet="cupcake"]{
+
+    background:
+        linear-gradient(
+            135deg,
+            #eadcff,
+            #d8ccff,
+            #c9e0ff,
+            #efd6ff
+        );
+
+}
+
+body[data-sweet="cupcake"] header h1{
+
+    background:
+        linear-gradient(
+            90deg,
+            #9b67df,
+            #c477e5,
+            #7397f5,
+            #9b67df
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+}
+
+body[data-sweet="cupcake"] .banner{
+
+    background:
+        linear-gradient(
+            100deg,
+            #9c72e8,
+            #c486ed,
+            #7e9df5,
+            #9c72e8
+        );
+
+}
+
+
+/* CAKE */
+
+body[data-sweet="cake"]{
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9f1ff,
+            #d7ddff,
+            #ffd9ec,
+            #e5d6ff
+        );
+
+}
+
+body[data-sweet="cake"] header h1{
+
+    background:
+        linear-gradient(
+            90deg,
+            #6fa5e8,
+            #a276df,
+            #ef82b2,
+            #6fa5e8
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+}
+
+body[data-sweet="cake"] .banner{
+
+    background:
+        linear-gradient(
+            100deg,
+            #72b5ef,
+            #9d8be8,
+            #ee8ab7,
+            #72b5ef
+        );
+
+}
