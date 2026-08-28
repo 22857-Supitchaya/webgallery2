@@ -1000,41 +1000,25 @@ footer p{
 <body>
 
 <body>
-
 <!-- ========================================
-     🍭 EPIC CANDY INTRO
+     🍭 CHOOSE YOUR SWEET INTRO
 ======================================== -->
 
 <div class="candy-intro" id="candyIntro">
 
-    <!-- Glow -->
-
     <div class="intro-glow"></div>
 
-    <!-- Orbit -->
-
-    <div class="sweet-orbit"></div>
-
-
-    <!-- Giant floating sweets -->
-
-    <div class="intro-candy c1">🍭</div>
-    <div class="intro-candy c2">🍩</div>
-    <div class="intro-candy c3">🧁</div>
-    <div class="intro-candy c4">🍰</div>
-
-
-    <!-- Portal -->
-
-    <div class="candy-portal"></div>
-
-
-    <!-- Main content -->
+    <div class="intro-particle">✨</div>
+    <div class="intro-particle">💗</div>
+    <div class="intro-particle">🍬</div>
+    <div class="intro-particle">⭐</div>
+    <div class="intro-particle">🍓</div>
+    <div class="intro-particle">🧁</div>
 
     <div class="intro-content">
 
         <div class="intro-small">
-            ✨ WELCOME TO ✨
+            ✨ WELCOME TO MY SWEET WORLD ✨
         </div>
 
         <h1 class="intro-title">
@@ -1042,16 +1026,64 @@ footer p{
         </h1>
 
         <p class="intro-subtitle">
-            🍬 A little world full of sweetness,
-            colors & memories 🍬
+            🍭 ก่อนเข้าไปชมแกลเลอรี...
+            เลือกขนมที่เป็นตัวแทนของคุณ 🍰
         </p>
 
-        <button
-            class="enter-candy"
-            onclick="enterCandyLand()"
-        >
-            🍭 ENTER CANDY LAND 🍭
-        </button>
+        <div class="sweet-choice">
+
+            <button
+                class="sweet-option candy-option"
+                onclick="chooseSweet('candy')"
+            >
+                <span class="sweet-icon">🍭</span>
+
+                <span class="sweet-name">
+                    Candy
+                </span>
+
+                <span class="sweet-desc">
+                    Sweet & Lovely
+                </span>
+            </button>
+
+
+            <button
+                class="sweet-option cupcake-option"
+                onclick="chooseSweet('cupcake')"
+            >
+                <span class="sweet-icon">🧁</span>
+
+                <span class="sweet-name">
+                    Cupcake
+                </span>
+
+                <span class="sweet-desc">
+                    Cute & Magical
+                </span>
+            </button>
+
+
+            <button
+                class="sweet-option cake-option"
+                onclick="chooseSweet('cake')"
+            >
+                <span class="sweet-icon">🍰</span>
+
+                <span class="sweet-name">
+                    Cake
+                </span>
+
+                <span class="sweet-desc">
+                    Dreamy & Fancy
+                </span>
+            </button>
+
+        </div>
+
+        <p class="choice-hint">
+            ✨ Choose your sweet ✨
+        </p>
 
         <button
             class="skip-intro"
@@ -1060,33 +1092,6 @@ footer p{
             Skip intro →
         </button>
 
-    </div>
-
-
-    <!-- Floating particles -->
-
-    <div class="intro-particle" style="left:8%;bottom:5%;animation-delay:0s">
-        ✨
-    </div>
-
-    <div class="intro-particle" style="left:25%;bottom:15%;animation-delay:1s">
-        🍬
-    </div>
-
-    <div class="intro-particle" style="left:40%;bottom:4%;animation-delay:2s">
-        💗
-    </div>
-
-    <div class="intro-particle" style="right:30%;bottom:10%;animation-delay:.5s">
-        ⭐
-    </div>
-
-    <div class="intro-particle" style="right:10%;bottom:5%;animation-delay:1.5s">
-        🍓
-    </div>
-
-    <div class="intro-particle" style="right:20%;bottom:25%;animation-delay:2.5s">
-        🧁
     </div>
 
 </div>
