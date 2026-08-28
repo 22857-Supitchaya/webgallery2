@@ -1,0 +1,692 @@
+/* ========================================
+   🍭 EPIC CANDY INTRO
+======================================== */
+
+.candy-intro{
+    position:fixed;
+    inset:0;
+    z-index:20000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff0fa 0%,
+            #ffc8e4 22%,
+            #d69cf0 55%,
+            #7d72d9 100%
+        );
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.candy-intro.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+
+/* ========================================
+   INTRO GLOW
+======================================== */
+
+.intro-glow{
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.85),
+            rgba(255,120,200,.3) 40%,
+            transparent 70%
+        );
+
+    filter:blur(10px);
+
+    animation:
+        introGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes introGlow{
+
+    from{
+        transform:scale(.8);
+        opacity:.65;
+    }
+
+    to{
+        transform:scale(1.3);
+        opacity:1;
+    }
+
+}
+
+
+/* ========================================
+   CANDY PORTAL
+======================================== */
+
+.candy-portal{
+    position:absolute;
+
+    width:430px;
+    height:430px;
+
+    border-radius:50%;
+
+    border:10px solid rgba(255,255,255,.85);
+
+    box-shadow:
+        0 0 0 15px rgba(255,255,255,.12),
+        0 0 50px rgba(255,80,180,.55),
+        0 0 120px rgba(170,100,255,.55),
+        inset 0 0 50px rgba(255,255,255,.7);
+
+    animation:
+        portalSpin 15s linear infinite;
+
+    background:
+        conic-gradient(
+            #ff72ad,
+            #ffd36e,
+            #9cf3d0,
+            #8fc8ff,
+            #c58cff,
+            #ff72ad
+        );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.candy-portal::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:340px;
+    height:340px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.95),
+            rgba(255,215,240,.85),
+            rgba(201,145,235,.65)
+        );
+
+    box-shadow:
+        inset 0 0 50px rgba(255,255,255,.8);
+
+}
+
+@keyframes portalSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* ========================================
+   GIANT CANDY
+======================================== */
+
+.intro-candy{
+    position:absolute;
+
+    z-index:5;
+
+    font-size:80px;
+
+    filter:
+        drop-shadow(
+            0 15px 15px rgba(100,40,100,.25)
+        );
+
+    animation:
+        candyOrbit 5s ease-in-out infinite;
+}
+
+.intro-candy.c1{
+    top:10%;
+    left:12%;
+}
+
+.intro-candy.c2{
+    top:15%;
+    right:13%;
+    animation-delay:.8s;
+}
+
+.intro-candy.c3{
+    bottom:12%;
+    left:15%;
+    animation-delay:1.5s;
+}
+
+.intro-candy.c4{
+    bottom:10%;
+    right:14%;
+    animation-delay:2s;
+}
+
+@keyframes candyOrbit{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(-15deg)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translateY(-35px)
+            rotate(20deg)
+            scale(1.15);
+    }
+
+}
+
+
+/* ========================================
+   INTRO CONTENT
+======================================== */
+
+.intro-content{
+
+    position:relative;
+
+    z-index:10;
+
+    width:min(90%,650px);
+
+    text-align:center;
+
+    color:#713f68;
+
+    animation:
+        introContentIn 1.2s
+        cubic-bezier(.2,1.5,.4,1)
+        both;
+
+}
+
+@keyframes introContentIn{
+
+    from{
+        opacity:0;
+        transform:
+            scale(.6)
+            translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+/* small text */
+
+.intro-small{
+
+    display:inline-block;
+
+    padding:8px 20px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.75);
+
+    border:2px solid white;
+
+    font-weight:700;
+
+    color:#dc5597;
+
+    box-shadow:
+        0 10px 30px rgba(180,70,140,.2);
+
+    animation:
+        introFloat 3s ease-in-out infinite;
+
+}
+
+@keyframes introFloat{
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+
+/* ========================================
+   INTRO TITLE
+======================================== */
+
+.intro-title{
+
+    margin:18px 0 5px;
+
+    font-family:"Itim",cursive;
+
+    font-size:clamp(55px,10vw,105px);
+
+    line-height:.95;
+
+    color:white;
+
+    text-shadow:
+
+        4px 4px 0 #ff75ad,
+        8px 8px 0 #c77be5,
+        0 20px 35px rgba(120,50,120,.25);
+
+    animation:
+        titleBounce 2s
+        ease-in-out infinite;
+
+}
+
+@keyframes titleBounce{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+
+.intro-subtitle{
+
+    font-size:19px;
+
+    color:#714c70;
+
+    font-weight:600;
+
+    margin-bottom:28px;
+
+}
+
+
+/* ========================================
+   ENTER BUTTON
+======================================== */
+
+.enter-candy{
+
+    position:relative;
+
+    padding:17px 38px;
+
+    border:none;
+
+    border-radius:60px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-family:"Prompt",sans-serif;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff5fa5,
+            #c879e8,
+            #7d9cff,
+            #ff5fa5
+        );
+
+    background-size:300%;
+
+    box-shadow:
+
+        0 12px 30px rgba(200,70,150,.35),
+
+        0 0 0 6px rgba(255,255,255,.45),
+
+        0 0 35px rgba(255,130,210,.5);
+
+    animation:
+        buttonGradient 4s linear infinite,
+        buttonPulse 2s ease-in-out infinite;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+}
+
+@keyframes buttonGradient{
+
+    to{
+        background-position:300%;
+    }
+
+}
+
+@keyframes buttonPulse{
+
+    50%{
+        transform:scale(1.06);
+    }
+
+}
+
+.enter-candy:hover{
+
+    transform:
+        scale(1.12)
+        rotate(-2deg);
+
+    box-shadow:
+
+        0 18px 45px rgba(200,70,150,.45),
+
+        0 0 0 8px rgba(255,255,255,.5),
+
+        0 0 60px rgba(255,150,220,.8);
+
+}
+
+
+/* shine */
+
+.enter-candy::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:60%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.7),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:
+        buttonShine 2.5s infinite;
+
+}
+
+@keyframes buttonShine{
+
+    0%{
+        left:-100%;
+    }
+
+    45%,100%{
+        left:140%;
+    }
+
+}
+
+
+/* ========================================
+   SKIP
+======================================== */
+
+.skip-intro{
+
+    display:block;
+
+    margin:18px auto 0;
+
+    border:none;
+
+    background:none;
+
+    color:#76566f;
+
+    font-family:"Prompt",sans-serif;
+
+    cursor:pointer;
+
+    opacity:.7;
+
+    transition:.3s;
+
+}
+
+.skip-intro:hover{
+
+    opacity:1;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ========================================
+   ORBITING SWEETS
+======================================== */
+
+.sweet-orbit{
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border:2px dashed rgba(255,255,255,.5);
+
+    border-radius:50%;
+
+    animation:
+        orbitRotate 12s linear infinite;
+
+}
+
+.sweet-orbit::before,
+.sweet-orbit::after{
+
+    content:"🍭";
+
+    position:absolute;
+
+    font-size:45px;
+
+}
+
+.sweet-orbit::before{
+
+    top:-25px;
+    left:50%;
+
+}
+
+.sweet-orbit::after{
+
+    bottom:-25px;
+    right:50%;
+
+}
+
+@keyframes orbitRotate{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* ========================================
+   PARTICLES
+======================================== */
+
+.intro-particle{
+
+    position:absolute;
+
+    pointer-events:none;
+
+    font-size:22px;
+
+    animation:
+        introParticle 5s
+        ease-in-out infinite;
+
+}
+
+@keyframes introParticle{
+
+    0%{
+        opacity:0;
+        transform:
+            translateY(80px)
+            scale(.3)
+            rotate(0);
+    }
+
+    30%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translateY(-220px)
+            scale(1.4)
+            rotate(360deg);
+    }
+
+}
+
+
+/* ========================================
+   INTRO EXIT EFFECT
+======================================== */
+
+.candy-intro.exit{
+
+    animation:
+        candyExplosion 1.2s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
+}
+
+@keyframes candyExplosion{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    45%{
+        opacity:1;
+        transform:scale(1.08);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(1.8);
+    }
+
+}
+
+
+/* ========================================
+   MOBILE INTRO
+======================================== */
+
+@media(max-width:650px){
+
+    .candy-portal{
+
+        width:310px;
+        height:310px;
+
+        border-width:7px;
+
+    }
+
+    .candy-portal::before{
+
+        width:245px;
+        height:245px;
+
+    }
+
+    .sweet-orbit{
+
+        width:350px;
+        height:350px;
+
+    }
+
+    .intro-candy{
+
+        font-size:48px;
+
+    }
+
+    .intro-title{
+
+        font-size:58px;
+
+    }
+
+    .intro-subtitle{
+
+        font-size:15px;
+
+        padding:0 20px;
+
+    }
+
+    .enter-candy{
+
+        font-size:16px;
+
+        padding:15px 30px;
+
+    }
+
+}
