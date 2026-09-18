@@ -3,43 +3,3418 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>
-        Sweet Candy Gallery 🍭
-    </title>
+<title>Kim Dokja | Fantasy Story</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <!-- Google Fonts -->
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Itim&family=Kanit:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
 
 
-    <!-- CSS -->
+<style>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050914;
+    color:#fff;
+    font-family:'Kanit',sans-serif;
+    overflow-x:hidden;
+    cursor:none;
+}
+
+button,
+a{
+    font-family:inherit;
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+#loader{
+
+    position:fixed;
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            #4d588d 0%,
+            #202b55 34%,
+            #0d142d 65%,
+            #030611 100%
+        );
+
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease;
+
+}
+
+#loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+
+/* loader stars */
+
+.loader-stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.loader-star{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 15px #dcb7ff;
+
+    animation:
+        loaderStar 2.5s ease-in-out infinite alternate;
+
+}
+
+@keyframes loaderStar{
+
+    from{
+        opacity:.15;
+        transform:scale(.5);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+
+}
+
+
+/* loader content */
+
+.loader-content{
+
+    position:relative;
+
+    text-align:center;
+
+    z-index:3;
+
+}
+
+.loader-orbit{
+
+    width:210px;
+    height:210px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    border-radius:50%;
+
+    position:relative;
+
+    margin:auto;
+
+    animation:
+        loaderSpin 18s linear infinite;
+
+    box-shadow:
+        0 0 50px
+        rgba(213,174,255,.15);
+
+}
+
+.loader-orbit::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:25px;
+
+    border:
+        1px dashed
+        rgba(255,230,255,.25);
+
+    border-radius:50%;
+
+}
+
+.loader-orbit::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:53px;
+
+    border:
+        1px solid
+        rgba(255,239,183,.2);
+
+    border-radius:50%;
+
+}
+
+@keyframes loaderSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* center flower */
+
+.loader-center{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:35px;
+    height:35px;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:5;
+
+}
+
+.loader-center span{
+
+    position:absolute;
+
+    left:11px;
+    top:0;
+
+    width:14px;
+    height:24px;
+
+    background:
+        linear-gradient(
+            #ffdff2,
+            #c995df
+        );
+
+    border-radius:
+        100% 0 100% 0;
+
+    transform-origin:
+        50% 100%;
+
+}
+
+.loader-center span:nth-child(1){
+    transform:rotate(0deg);
+}
+
+.loader-center span:nth-child(2){
+    transform:rotate(72deg);
+}
+
+.loader-center span:nth-child(3){
+    transform:rotate(144deg);
+}
+
+.loader-center span:nth-child(4){
+    transform:rotate(216deg);
+}
+
+.loader-center span:nth-child(5){
+    transform:rotate(288deg);
+}
+
+.loader-center i{
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#ffe9a6;
+
+    left:13px;
+    top:9px;
+
+    box-shadow:
+        0 0 15px #ffe9a6;
+
+}
+
+
+/* floating loader petals */
+
+.loader-petal{
+
+    position:absolute;
+
+    width:13px;
+    height:22px;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd8ec,
+            #d294df
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(255,190,235,.4);
+
+    opacity:0;
+
+    animation:
+        loaderPetalAppear 5s ease-in-out infinite;
+
+}
+
+.loader-petal:nth-child(1){
+    left:5%;
+    top:25%;
+    animation-delay:.2s;
+}
+
+.loader-petal:nth-child(2){
+    left:15%;
+    top:75%;
+    animation-delay:1s;
+}
+
+.loader-petal:nth-child(3){
+    right:7%;
+    top:20%;
+    animation-delay:1.7s;
+}
+
+.loader-petal:nth-child(4){
+    right:18%;
+    top:70%;
+    animation-delay:2.2s;
+}
+
+.loader-petal:nth-child(5){
+    left:27%;
+    top:10%;
+    animation-delay:2.8s;
+}
+
+.loader-petal:nth-child(6){
+    right:28%;
+    top:12%;
+    animation-delay:3.2s;
+}
+
+.loader-petal:nth-child(7){
+    left:10%;
+    top:47%;
+    animation-delay:3.7s;
+}
+
+.loader-petal:nth-child(8){
+    right:11%;
+    top:52%;
+    animation-delay:4.1s;
+}
+
+@keyframes loaderPetalAppear{
+
+    0%{
+        opacity:0;
+        transform:
+            translateY(20px)
+            rotate(0deg)
+            scale(.4);
+    }
+
+    30%{
+        opacity:.9;
+    }
+
+    70%{
+        opacity:.8;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translateY(-55px)
+            rotate(300deg)
+            scale(1);
+    }
+
+}
+
+
+.loader-title{
+
+    margin-top:38px;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:42px;
+
+    letter-spacing:9px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d9b0ff,
+            #ffeab6,
+            #d9b0ff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+.loader-sub{
+
+    margin-top:7px;
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    opacity:.6;
+
+}
+
+.loader-line{
+
+    width:250px;
+    height:2px;
+
+    margin:25px auto 0;
+
+    background:
+        rgba(255,255,255,.12);
+
+    overflow:hidden;
+
+}
+
+.loader-line::after{
+
+    content:"";
+
+    display:block;
+
+    height:100%;
+    width:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #dbaaff,
+            #fff1b7,
+            #bdeaff
+        );
+
+    animation:
+        loaderProgress 3.2s ease forwards;
+
+}
+
+@keyframes loaderProgress{
+    to{
+        width:100%;
+    }
+}
+
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+.cursor-flower{
+
+    position:fixed;
+
+    width:25px;
+    height:25px;
+
+    pointer-events:none;
+
+    z-index:99998;
+
+    transform:
+        translate(-50%,-50%);
+
+}
+
+.cursor-flower span{
+
+    position:absolute;
+
+    width:11px;
+    height:19px;
+
+    left:7px;
+    top:0;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        linear-gradient(
+            #ffd8ef,
+            #b982d0
+        );
+
+    transform-origin:
+        50% 100%;
+
+}
+
+.cursor-flower span:nth-child(1){
+    transform:rotate(0deg);
+}
+
+.cursor-flower span:nth-child(2){
+    transform:rotate(72deg);
+}
+
+.cursor-flower span:nth-child(3){
+    transform:rotate(144deg);
+}
+
+.cursor-flower span:nth-child(4){
+    transform:rotate(216deg);
+}
+
+.cursor-flower span:nth-child(5){
+    transform:rotate(288deg);
+}
+
+.cursor-flower i{
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    left:9px;
+    top:8px;
+
+    border-radius:50%;
+
+    background:#ffeaa8;
+
+}
+
+
+/* =========================================================
+   WORLD
+========================================================= */
+
+.world{
+
+    --sky-top:#1b285b;
+    --sky-mid:#57739c;
+    --sky-low:#9acac1;
+
+    --grass-dark:#214b34;
+    --grass-mid:#397650;
+
+    min-height:100vh;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--sky-top) 0%,
+            var(--sky-mid) 43%,
+            var(--sky-low) 73%,
+            var(--grass-mid) 100%
+        );
+
+    isolation:isolate;
+
+}
+
+
+/*
+   แทนการเปลี่ยน background ตรง ๆ
+   ใช้ pseudo layer เพื่อ crossfade
+*/
+
+.world::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #281d4e 0%,
+            #75496d 35%,
+            #d8887c 58%,
+            #9a9b6c 77%,
+            #355d43 100%
+        );
+
+    transition:
+        opacity 2.2s
+        cubic-bezier(.4,0,.2,1);
+
+}
+
+.world.sunset::before{
+    opacity:1;
+}
+
+
+.world::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #020510 0%,
+            #0b1740 40%,
+            #203d55 72%,
+            #18382d 100%
+        );
+
+    transition:
+        opacity 2.5s
+        cubic-bezier(.4,0,.2,1);
+
+}
+
+.world.night::after{
+    opacity:1;
+}
+
+
+/* =========================================================
+   ATMOSPHERIC GLOW
+========================================================= */
+
+.atmosphere{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 42%,
+            rgba(255,255,255,.13),
+            transparent 42%
+        ),
+        radial-gradient(
+            ellipse at 50% 75%,
+            rgba(169,255,211,.15),
+            transparent 35%
+        );
+
+}
+
+
+/* =========================================================
+   SKY
+========================================================= */
+
+.sky{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:5;
+
+    pointer-events:none;
+
+}
+
+
+.moon{
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:11%;
+    top:10%;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fffbd9,
+            #fff0b0
+        );
+
+    box-shadow:
+        0 0 40px #fff3bf,
+        0 0 100px
+        rgba(255,239,177,.45);
+
+    transition:
+        all 2.5s
+        cubic-bezier(.4,0,.2,1);
+
+}
+
+
+.world.sunset .moon{
+
+    background:#ffd09e;
+
+    box-shadow:
+        0 0 70px
+        rgba(255,180,130,.55);
+
+    transform:
+        translate(-15px,20px)
+        scale(.9);
+
+}
+
+
+.world.night .moon{
+
+    width:112px;
+    height:112px;
+
+    background:#edf1ff;
+
+    box-shadow:
+        0 0 80px
+        rgba(180,200,255,.65);
+
+    transform:
+        translate(10px,10px);
+
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.star{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 8px white;
+
+    animation:
+        twinkle 3s
+        ease-in-out
+        infinite alternate;
+
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.2;
+        transform:scale(.6);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+
+}
+
+
+/* =========================================================
+   CLOUDS
+========================================================= */
+
+.cloud{
+
+    position:absolute;
+
+    width:340px;
+    height:75px;
+
+    border-radius:100px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    filter:blur(6px);
+
+}
+
+.cloud::before,
+.cloud::after{
+
+    content:"";
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:inherit;
+
+}
+
+.cloud::before{
+
+    width:150px;
+    height:150px;
+
+    left:55px;
+    bottom:8px;
+
+}
+
+.cloud::after{
+
+    width:110px;
+    height:110px;
+
+    right:45px;
+    bottom:2px;
+
+}
+
+.cloud.one{
+    left:-100px;
+    top:26%;
+}
+
+.cloud.two{
+    right:-120px;
+    top:38%;
+    transform:scale(.7);
+}
+
+
+/* =========================================================
+   DISTANT FLOATING ISLANDS
+========================================================= */
+
+.floating-island{
+
+    position:absolute;
+
+    z-index:7;
+
+    width:100px;
+    height:55px;
+
+    background:
+        linear-gradient(
+            #7185a0,
+            #344967
+        );
+
+    clip-path:
+        polygon(
+            0 15%,
+            100% 0,
+            78% 100%,
+            23% 82%
+        );
+
+    opacity:.55;
+
+    filter:
+        drop-shadow(
+            0 10px 15px
+            rgba(0,0,0,.3)
+        );
+
+    animation:
+        islandFloat 7s
+        ease-in-out
+        infinite alternate;
+
+}
+
+.floating-island.one{
+    top:23%;
+    left:8%;
+}
+
+.floating-island.two{
+    top:30%;
+    right:7%;
+    transform:scale(.7);
+    animation-delay:2s;
+}
+
+@keyframes islandFloat{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-18px);
+    }
+
+}
+
+
+/* =========================================================
+   MOUNTAIN SYSTEM
+========================================================= */
+
+.mountains{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:8;
+
+    pointer-events:none;
+
+}
+
+
+/* back mountains */
+
+.mountain{
+
+    position:absolute;
+
+    bottom:25%;
+
+    width:0;
+    height:0;
+
+    border-left:
+        240px solid transparent;
+
+    border-right:
+        240px solid transparent;
+
+    border-bottom:
+        280px solid rgba(52,76,107,.65);
+
+}
+
+.mountain.m1{
+    left:-5%;
+    transform:scale(1.1);
+}
+
+.mountain.m2{
+    left:17%;
+    transform:scale(.85);
+}
+
+.mountain.m3{
+    left:38%;
+    transform:scale(1.25);
+}
+
+.mountain.m4{
+    right:12%;
+    transform:scale(.95);
+}
+
+.mountain.m5{
+    right:-7%;
+    transform:scale(1.2);
+}
+
+
+/* mountain snow */
+
+.mountain::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-35px;
+    top:75px;
+
+    width:70px;
+    height:70px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.4),
+            transparent
+        );
+
+    clip-path:
+        polygon(
+            50% 0,
+            100% 100%,
+            70% 75%,
+            50% 88%,
+            30% 75%,
+            0 100%
+        );
+
+}
+
+
+/* mountain haze */
+
+.mountain-fog{
+
+    position:absolute;
+
+    bottom:24%;
+
+    left:0;
+
+    width:100%;
+    height:120px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(207,239,226,.2),
+            rgba(214,241,224,.08),
+            transparent
+        );
+
+    filter:blur(10px);
+
+}
+
+
+/* =========================================================
+   CASTLE
+========================================================= */
+
+.castle{
+
+    position:absolute;
+
+    z-index:12;
+
+    left:50%;
+
+    bottom:22%;
+
+    width:700px;
+    height:370px;
+
+    transform:
+        translateX(-50%);
+
+    filter:
+        drop-shadow(
+            0 30px 35px
+            rgba(0,0,0,.3)
+        );
+
+}
+
+
+/* castle main body */
+
+.castle-body{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:105px;
+    right:105px;
+
+    height:230px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #526b8d 0%,
+            #91a9c0 25%,
+            #b4c8d7 45%,
+            #718ba9 70%,
+            #4a6387 100%
+        );
+
+    border-radius:
+        5px 5px 0 0;
+
+    box-shadow:
+        inset 0 0 35px
+        rgba(255,255,255,.17);
+
+}
+
+
+/* center tower */
+
+.castle-center{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:0;
+
+    width:155px;
+    height:300px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #4b6488,
+            #a9bfd2,
+            #536d92
+        );
+
+    z-index:2;
+
+}
+
+.castle-center::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-75px;
+
+    left:-38px;
+
+    width:231px;
+    height:120px;
+
+    background:#3b527a;
+
+    clip-path:
+        polygon(
+            50% 0,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+/* towers */
+
+.tower{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:125px;
+
+    height:285px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #465f84,
+            #a9c1d5,
+            #526b91
+        );
+
+}
+
+.tower.left{
+    left:10px;
+}
+
+.tower.right{
+    right:10px;
+}
+
+
+.tower::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-65px;
+
+    left:-20px;
+
+    width:165px;
+    height:105px;
+
+    background:#374e76;
+
+    clip-path:
+        polygon(
+            50% 0,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+/* tower windows */
+
+.tower::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:47px;
+
+    bottom:80px;
+
+    width:31px;
+    height:65px;
+
+    border-radius:
+        20px 20px 0 0;
+
+    background:
+        #233b61;
+
+    box-shadow:
+        0 -4px 15px
+        rgba(120,200,255,.2);
+
+}
+
+
+/* castle windows */
+
+.castle-window{
+
+    position:absolute;
+
+    width:34px;
+    height:68px;
+
+    border-radius:
+        20px 20px 0 0;
+
+    background:#253d63;
+
+    box-shadow:
+        0 0 18px
+        rgba(130,210,255,.18);
+
+}
+
+.castle-window.w1{
+    left:25%;
+    bottom:80px;
+}
+
+.castle-window.w2{
+    right:25%;
+    bottom:80px;
+}
+
+
+/* castle door */
+
+.castle-door{
+
+    position:absolute;
+
+    width:70px;
+    height:105px;
+
+    left:50%;
+    bottom:0;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        40px 40px 0 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1f3558,
+            #314b70
+        );
+
+}
+
+
+/* castle lights */
+
+.castle-light{
+
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#ffe8a6;
+
+    box-shadow:
+        0 0 10px #ffe8a6,
+        0 0 25px #ffdb82;
+
+    animation:
+        castleGlow 2s
+        infinite alternate;
+
+}
+
+.castle-light.l1{
+    left:16%;
+    bottom:150px;
+}
+
+.castle-light.l2{
+    left:82%;
+    bottom:175px;
+}
+
+.castle-light.l3{
+    left:49%;
+    bottom:235px;
+}
+
+@keyframes castleGlow{
+
+    from{
+        opacity:.4;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
+   SMOOTH SKY → MEADOW TRANSITION
+========================================================= */
+
+.horizon{
+
+    position:absolute;
+
+    z-index:15;
+
+    left:0;
+    right:0;
+
+    bottom:20%;
+
+    height:230px;
+
+    pointer-events:none;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(190,229,215,.10) 25%,
+            rgba(179,221,196,.22) 48%,
+            rgba(104,159,103,.32) 72%,
+            rgba(48,100,62,.6) 100%
+        );
+
+    filter:blur(4px);
+
+}
+
+
+/* extra fog */
+
+.fog{
+
+    position:absolute;
+
+    z-index:17;
+
+    left:-10%;
+    right:-10%;
+
+    bottom:18%;
+
+    height:150px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(226,248,235,.35),
+            transparent 65%
+        );
+
+    filter:blur(18px);
+
+    animation:
+        fogMove 12s
+        ease-in-out
+        infinite alternate;
+
+}
+
+@keyframes fogMove{
+
+    from{
+        transform:
+            translateX(-5%);
+    }
+
+    to{
+        transform:
+            translateX(5%);
+    }
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    z-index:25;
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:
+        100px
+        20px
+        230px;
+
+}
+
+
+.hero-content{
+
+    max-width:1050px;
+
+    position:relative;
+
+    z-index:30;
+
+}
+
+
+/* decorative top */
+
+.hero-decoration{
+
+    margin-bottom:18px;
+
+    font-size:13px;
+
+    letter-spacing:8px;
+
+    opacity:.85;
+
+    text-shadow:
+        0 0 15px
+        rgba(255,255,255,.5);
+
+}
+
+
+.hero-title{
+
+    /*
+       แก้ J โดยเฉพาะ
+       ไม่ให้หางโดน clipping
+    */
+
+    overflow:visible;
+
+    display:inline-block;
+
+    padding:
+        .02em
+        .14em
+        .22em
+        .08em;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(
+            82px,
+            13vw,
+            180px
+        );
+
+    line-height:.82;
+
+    letter-spacing:-5px;
+
+    font-weight:600;
+
+    background:
+
+        linear-gradient(
+            110deg,
+            #d7a8ff,
+            #ffd7ed 32%,
+            #fff0b2 64%,
+            #d9baff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(225,174,255,.5)
+        )
+        drop-shadow(
+            0 18px 35px
+            rgba(0,0,0,.3)
+        );
+
+    animation:
+        titleFloat 5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes titleFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+
+/* title glow */
+
+.title-line{
+
+    width:260px;
+    height:1px;
+
+    margin:
+        22px
+        auto
+        20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #fff0b8,
+            #d7b1ff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(255,220,255,.5);
+
+}
+
+
+/* description */
+
+.hero-desc{
+
+    max-width:800px;
+
+    margin:
+        0 auto
+        28px;
+
+    font-size:18px;
+
+    line-height:2;
+
+    text-shadow:
+        0 3px 14px
+        rgba(0,0,0,.7);
+
+}
+
+
+/* button */
+
+.story-button{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    padding:
+        15px 38px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.65);
+
+    border-radius:50px;
+
+    color:white;
+
+    text-decoration:none;
+
+    background:
+        rgba(255,255,255,.09);
+
+    backdrop-filter:
+        blur(14px);
+
+    box-shadow:
+        0 0 25px
+        rgba(221,166,255,.2),
+
+        inset 0 0 25px
+        rgba(255,255,255,.07);
+
+    transition:.5s;
+
+}
+
+.story-button:hover{
+
+    transform:
+        translateY(-5px)
+        scale(1.04);
+
+    background:
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        0 0 25px #dda6ff,
+        0 0 70px
+        rgba(221,166,255,.35);
+
+}
+
+
+/* =========================================================
+   MEADOW
+========================================================= */
+
+.meadow{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:31%;
+
+    z-index:18;
+
+    overflow:hidden;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(63,124,76,.15),
+            rgba(40,89,54,.7) 45%,
+            #183d29 100%
+        );
+
+}
+
+
+/* distant grass */
+
+.grass{
+
+    position:absolute;
+
+    bottom:-5px;
+
+    width:3px;
+
+    height:55px;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #244b31,
+            #6b9d5f
+        );
+
+    transform-origin:bottom;
+
+    animation:
+        grassSway
+        3s ease-in-out
+        infinite;
+
+}
+
+@keyframes grassSway{
+
+    0%,100%{
+        transform:rotate(-5deg);
+    }
+
+    50%{
+        transform:rotate(8deg);
+    }
+
+}
+
+
+/* =========================================================
+   FLOWERS
+========================================================= */
+
+.meadow-flower{
+
+    position:absolute;
+
+    bottom:8%;
+
+    width:20px;
+    height:20px;
+
+    z-index:4;
+
+    filter:
+        drop-shadow(
+            0 0 7px
+            rgba(255,200,255,.55)
+        );
+
+    animation:
+        flowerSway 4s
+        ease-in-out
+        infinite;
+
+}
+
+.meadow-flower::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-10px;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 0%,
+            #ffc8e8 0 27%,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 100% 50%,
+            #ffd4ed 0 27%,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            #e8b1e8 0 27%,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 0% 50%,
+            #ffd4ed 0 27%,
+            transparent 30%
+        );
+
+}
+
+.meadow-flower::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    left:7px;
+    top:7px;
+
+    border-radius:50%;
+
+    background:#ffe7a1;
+
+    box-shadow:
+        0 0 7px #ffe7a1;
+
+}
+
+
+@keyframes flowerSway{
+
+    0%,100%{
+        transform:
+            rotate(-4deg)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            rotate(5deg)
+            translateY(-3px);
+    }
+
+}
+
+
+/* different flower sizes */
+
+.flower-small{
+    transform:scale(.55);
+}
+
+.flower-medium{
+    transform:scale(.85);
+}
+
+.flower-large{
+    transform:scale(1.25);
+}
+
+
+/* =========================================================
+   FOREGROUND DECOR
+========================================================= */
+
+.foreground{
+
+    position:absolute;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:170px;
+
+    z-index:28;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(10,29,19,.85),
+            transparent
+        );
+
+}
+
+
+/* =========================================================
+   FIRE FLIES
+========================================================= */
+
+.firefly{
+
+    position:fixed;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#fff0a6;
+
+    box-shadow:
+        0 0 10px #fff0a6,
+        0 0 25px #ffe48d;
+
+    pointer-events:none;
+
+    z-index:22;
+
+    animation:
+        fireflyMove
+        6s ease-in-out
+        infinite alternate;
+
+}
+
+@keyframes fireflyMove{
+
+    from{
+        opacity:.1;
+        transform:
+            translate(0,0)
+            scale(.6);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(
+                50px,
+                -60px
+            )
+            scale(1.3);
+    }
+
+}
+
+
+/* =========================================================
+   FALLING PETALS
+========================================================= */
+
+.petals{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:50;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+.petal{
+
+    position:absolute;
+
+    width:12px;
+    height:20px;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd7ec,
+            #d99cdd
+        );
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(255,180,230,.45)
+        );
+
+    animation:
+        fallingPetal
+        linear forwards;
+
+}
+
+@keyframes fallingPetal{
+
+    0%{
+
+        transform:
+            translateY(-40px)
+            rotate(0deg);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(110vh)
+            translateX(var(--drift))
+            rotate(720deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   BUTTERFLIES
+========================================================= */
+
+.creature{
+
+    position:fixed;
+
+    z-index:52;
+
+    pointer-events:none;
+
+    font-size:28px;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(255,210,255,.6)
+        );
+
+}
+
+.butterfly{
+
+    animation:
+        butterflyFly
+        19s linear infinite;
+
+}
+
+.butterfly.two{
+
+    animation-delay:-7s;
+
+    font-size:20px;
+
+}
+
+.butterfly.three{
+
+    animation-delay:-13s;
+
+    font-size:34px;
+
+}
+
+@keyframes butterflyFly{
+
+    0%{
+        left:-5%;
+        top:68%;
+        transform:rotate(10deg);
+    }
+
+    25%{
+        left:25%;
+        top:38%;
+    }
+
+    50%{
+        left:52%;
+        top:62%;
+    }
+
+    75%{
+        left:78%;
+        top:27%;
+    }
+
+    100%{
+        left:105%;
+        top:48%;
+        transform:rotate(-10deg);
+    }
+
+}
+
+
+/* =========================================================
+   HERO FLOATING ORNAMENTS
+========================================================= */
+
+.orb{
+
+    position:absolute;
+
+    width:13px;
+    height:13px;
+
+    border-radius:50%;
+
+    background:
+        #ffe8ae;
+
+    box-shadow:
+        0 0 10px #ffe8ae,
+        0 0 30px #dfa8ff;
+
+    animation:
+        orbFloat 5s
+        ease-in-out
+        infinite alternate;
+
+}
+
+.orb.o1{
+    left:12%;
+    top:42%;
+}
+
+.orb.o2{
+    right:15%;
+    top:53%;
+    animation-delay:1s;
+}
+
+.orb.o3{
+    left:22%;
+    top:67%;
+    animation-delay:2s;
+}
+
+.orb.o4{
+    right:26%;
+    top:34%;
+    animation-delay:3s;
+}
+
+@keyframes orbFloat{
+
+    from{
+        transform:
+            translateY(0)
+            scale(.7);
+        opacity:.35;
+    }
+
+    to{
+        transform:
+            translateY(-30px)
+            scale(1.2);
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery-section{
+
+    position:relative;
+
+    z-index:60;
+
+    padding:
+        120px
+        6vw
+        140px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #07101d 0%,
+            #070c19 100%
+        );
+
+    overflow:hidden;
+
+}
+
+
+/* decorative background */
+
+.gallery-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:800px;
+    height:500px;
+
+    left:50%;
+    top:0;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(184,135,230,.11),
+            transparent 65%
+        );
+
+    pointer-events:none;
+
+}
+
+
+/* section title */
+
+.section-title{
+
+    position:relative;
+
+    text-align:center;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(52px,7vw,76px);
+
+    font-weight:600;
+
+    background:
+        linear-gradient(
+            90deg,
+            #dfb0ff,
+            #fff0b5,
+            #dfb0ff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    text-shadow:
+        0 0 30px
+        rgba(220,170,255,.15);
+
+}
+
+
+.section-sub{
+
+    text-align:center;
+
+    opacity:.65;
+
+    margin-top:8px;
+
+    margin-bottom:70px;
+
+}
+
+
+/* gallery */
+
+.gallery{
+
+    max-width:1250px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:38px;
+
+}
+
+
+/* =========================================================
+   GLASS CARD
+========================================================= */
+
+.card{
+
+    position:relative;
+
+    min-height:520px;
+
+    padding:10px;
+
+    border-radius:28px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.20),
+            rgba(255,255,255,.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.48);
+
+    backdrop-filter:
+        blur(16px);
+
+    box-shadow:
+
+        0 30px 75px
+        rgba(0,0,0,.45),
+
+        inset 0 0 30px
+        rgba(255,255,255,.05);
+
+    overflow:hidden;
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .15s ease,
+        box-shadow .5s ease;
+
+}
+
+
+/* glass reflection */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-30%;
+
+    z-index:5;
+
+    pointer-events:none;
+
+    background:
+
+        linear-gradient(
+            115deg,
+            transparent 38%,
+            rgba(255,255,255,.55) 48%,
+            transparent 57%
+        );
+
+    transform:
+        translateX(-100%)
+        rotate(8deg);
+
+    transition:
+        transform 1.2s ease;
+
+}
+
+.card:hover::before{
+
+    transform:
+        translateX(100%)
+        rotate(8deg);
+
+}
+
+
+/* sparkling glass */
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:8;
+
+    background:
+
+        radial-gradient(
+            circle at 12% 15%,
+            white 0 1px,
+            transparent 3px
+        ),
+
+        radial-gradient(
+            circle at 86% 20%,
+            white 0 1px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 20% 90%,
+            white 0 1px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 90% 82%,
+            white 0 1px,
+            transparent 4px
+        );
+
+    animation:
+        glassSparkle
+        2.5s
+        ease-in-out
+        infinite alternate;
+
+}
+
+@keyframes glassSparkle{
+
+    from{
+        opacity:.25;
+        filter:brightness(.8);
+    }
+
+    to{
+        opacity:1;
+        filter:brightness(1.8);
+    }
+
+}
+
+
+.card-image{
+
+    position:relative;
+
+    height:275px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+.card-image img{
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+        transform .8s ease;
+
+}
+
+
+.card:hover .card-image img{
+
+    transform:
+        scale(1.09);
+
+}
+
+
+.image-shine{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent 30%,
+            rgba(255,255,255,.5) 48%,
+            transparent 62%
+        );
+
+    transform:
+        translateX(-130%);
+
+    transition:
+        1s;
+
+}
+
+
+.card:hover .image-shine{
+
+    transform:
+        translateX(130%);
+
+}
+
+
+.card-info{
+
+    position:relative;
+
+    z-index:10;
+
+    padding:
+        25px
+        20px;
+
+}
+
+
+.card-info h3{
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:33px;
+
+    color:#ffe4f5;
+
+    margin-bottom:8px;
+
+}
+
+
+.card-info p{
+
+    font-size:14px;
+
+    line-height:1.9;
+
+    color:
+        rgba(255,255,255,.8);
+
+}
+
+
+.card-tag{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:
+        5px 13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    border-radius:30px;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    opacity:.7;
+
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline-section{
+
+    position:relative;
+
+    z-index:60;
+
+    padding:
+        120px 6vw
+        150px;
+
+    background:#070c19;
+
+}
+
+
+.timeline{
+
+    position:relative;
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:0;
+    bottom:0;
+
+    width:1px;
+
+    background:
+
+        linear-gradient(
+            transparent,
+            #d6a9ff,
+            #fff0b7,
+            #d6a9ff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(220,170,255,.4);
+
+}
+
+
+.timeline-item{
+
+    position:relative;
+
+    width:50%;
+
+    padding:
+        25px
+        45px;
+
+}
+
+
+.timeline-item:nth-child(odd){
+
+    text-align:right;
+
+}
+
+
+.timeline-item:nth-child(even){
+
+    margin-left:50%;
+
+}
+
+
+.timeline-dot{
+
+    position:absolute;
+
+    top:43px;
+
+    width:15px;
+    height:15px;
+
+    border-radius:50%;
+
+    background:#fff0b7;
+
+    box-shadow:
+        0 0 15px #fff0b7,
+        0 0 35px #d9a5ff;
+
+}
+
+
+.timeline-item:nth-child(odd)
+.timeline-dot{
+
+    right:-7px;
+
+}
+
+
+.timeline-item:nth-child(even)
+.timeline-dot{
+
+    left:-7px;
+
+}
+
+
+.timeline-box{
+
+    padding:25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:22px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    backdrop-filter:
+        blur(12px);
+
+    transition:.4s;
+
+}
+
+
+.timeline-box:hover{
+
+    transform:
+        translateY(-6px);
+
+    background:
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 20px 50px
+        rgba(205,155,255,.13);
+
+}
+
+
+.chapter{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    opacity:.5;
+
+}
+
+
+.timeline-box h3{
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:31px;
+
+    color:#ffe6b7;
+
+    margin:
+        5px 0;
+
+}
+
+
+/* =========================================================
+   SECRET
+========================================================= */
+
+.secret{
+
+    position:relative;
+
+    z-index:60;
+
+    text-align:center;
+
+    padding:
+        100px 20px
+        140px;
+
+    background:#070c19;
+
+}
+
+
+.secret-button{
+
+    color:white;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    padding:
+        14px 28px;
+
+    border-radius:50px;
+
+    cursor:none;
+
+    transition:.4s;
+
+}
+
+
+.secret-button:hover{
+
+    border-color:#e1afff;
+
+    box-shadow:
+        0 0 30px
+        rgba(220,170,255,.3);
+
+}
+
+
+.secret-text{
+
+    max-width:700px;
+
+    margin:
+        25px auto 0;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:30px;
+
+    color:#ffe7b1;
+
+    opacity:0;
+
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:
+        opacity 1s,
+        max-height 1s;
+
+}
+
+
+.secret-text.show{
+
+    opacity:1;
+
+    max-height:250px;
+
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls{
+
+    position:fixed;
+
+    top:20px;
+    right:20px;
+
+    z-index:500;
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+.control{
+
+    width:54px;
+    height:54px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.4);
+
+    background:
+        rgba(25,35,75,.3);
+
+    backdrop-filter:
+        blur(14px);
+
+    color:white;
+
+    font-size:21px;
+
+    cursor:none;
+
+    transition:
+        transform .4s,
+        background .4s,
+        box-shadow .4s;
+
+}
+
+
+.control:hover{
+
+    transform:
+        scale(1.1)
+        rotate(8deg);
+
+    background:
+        rgba(255,255,255,.16);
+
+    box-shadow:
+        0 0 30px
+        rgba(220,180,255,.4);
+
+}
+
+
+/* =========================================================
+   THEME TRANSITION FLASH
+========================================================= */
+
+.theme-flash{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9990;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,255,255,.35),
+            transparent 60%
+        );
+
+    opacity:0;
+
+}
+
+
+.theme-flash.play{
+
+    animation:
+        themeFlash 1.6s
+        ease;
+
+}
+
+
+@keyframes themeFlash{
+
+    0%{
+        opacity:0;
+    }
+
+    25%{
+        opacity:.65;
+    }
+
+    100%{
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   MAGIC CLICK
+========================================================= */
+
+.magic-ring{
+
+    position:fixed;
+
+    width:20px;
+    height:20px;
+
+    border:
+        2px solid
+        #f0caff;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:9991;
+
+    transform:
+        translate(-50%,-50%);
+
+    animation:
+        magicRing .9s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes magicRing{
+
+    from{
+        width:10px;
+        height:10px;
+        opacity:1;
+    }
+
+    to{
+        width:250px;
+        height:250px;
+        opacity:0;
+    }
+
+}
+
+
+.magic-petal{
+
+    position:fixed;
+
+    width:10px;
+    height:17px;
+
+    border-radius:
+        100% 0 100% 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd8ed,
+            #c78fd4
+        );
+
+    pointer-events:none;
+
+    z-index:9992;
+
+    animation:
+        magicExplosion
+        .9s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes magicExplosion{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.3);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            rotate(540deg)
+            scale(1);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9000;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    background:
+        rgba(2,4,12,.9);
+
+    backdrop-filter:
+        blur(20px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.5s;
+
+}
+
+
+.lightbox.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+.lightbox img{
+
+    max-width:90vw;
+
+    max-height:85vh;
+
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.6);
+
+    box-shadow:
+        0 0 35px
+        rgba(220,170,255,.5),
+
+        0 0 100px
+        rgba(220,170,255,.2);
+
+}
+
+
+.lightbox-close{
+
+    position:absolute;
+
+    top:25px;
+    right:30px;
+
+    font-size:40px;
+
+    cursor:none;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    position:relative;
+
+    z-index:60;
+
+    padding:
+        55px 20px;
+
+    text-align:center;
+
+    background:#040711;
+
+    color:
+        rgba(255,255,255,.5);
+
+    font-size:13px;
+
+}
+
+
+footer strong{
+
+    color:#f1d4ff;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .gallery{
+
+        grid-template-columns:1fr;
+
+        max-width:560px;
+
+    }
+
+    .castle{
+
+        transform:
+            translateX(-50%)
+            scale(.72);
+
+        bottom:18%;
+
+    }
+
+    .mountain.m2{
+        left:-10%;
+    }
+
+    .mountain.m3{
+        left:25%;
+    }
+
+    .mountain.m4{
+        right:-15%;
+    }
+
+    .timeline::before{
+
+        left:15px;
+
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even){
+
+        width:100%;
+
+        margin-left:0;
+
+        text-align:left;
+
+        padding-left:50px;
+
+    }
+
+    .timeline-item:nth-child(odd){
+
+        text-align:left;
+
+    }
+
+    .timeline-item:nth-child(odd)
+    .timeline-dot,
+    .timeline-item:nth-child(even)
+    .timeline-dot{
+
+        left:8px;
+
+        right:auto;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    body{
+        cursor:auto;
+    }
+
+    .cursor-flower{
+        display:none;
+    }
+
+    .controls{
+        top:10px;
+        right:10px;
+    }
+
+    .control{
+
+        width:44px;
+        height:44px;
+
+        font-size:17px;
+
+    }
+
+    .hero{
+
+        padding:
+            100px 18px
+            180px;
+
+    }
+
+    .hero-title{
+
+        font-size:76px;
+
+        letter-spacing:
+            -3px;
+
+        /*
+          extra space for J
+        */
+
+        padding:
+            .02em
+            .18em
+            .27em
+            .08em;
+
+    }
+
+    .hero-desc{
+
+        font-size:14px;
+
+        line-height:1.9;
+
+    }
+
+    .castle{
+
+        transform:
+            translateX(-50%)
+            scale(.48);
+
+        bottom:14%;
+
+    }
+
+    .moon{
+
+        width:90px;
+        height:90px;
+
+    }
+
+    .gallery-section{
+
+        padding-left:20px;
+        padding-right:20px;
+
+    }
+
+    .timeline-section{
+
+        padding-left:20px;
+        padding-right:20px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -47,1468 +3422,1804 @@
 <body>
 
 
-    <!-- =====================================================
-         🍰 GRAND LOADING / INTRO SCREEN
-    ====================================================== -->
+<!-- ======================================================
+     LOADER
+====================================================== -->
 
-    <div
-        class="intro"
-        id="intro"
-    >
+<div id="loader">
 
-
-        <!-- Background glow -->
-
-        <div class="intro-glow glow-one"></div>
-
-        <div class="intro-glow glow-two"></div>
-
-        <div class="intro-glow glow-three"></div>
+    <div class="loader-stars"></div>
 
 
-        <!-- Falling candy -->
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
+    <div class="loader-petal"></div>
 
-        <div class="intro-rain">
 
-            <span>🍭</span>
-            <span>🍬</span>
-            <span>🍰</span>
-            <span>🧁</span>
-            <span>🍩</span>
-            <span>🍪</span>
-            <span>🍓</span>
-            <span>✨</span>
-            <span>💗</span>
-            <span>⭐</span>
+    <div class="loader-content">
+
+        <div class="loader-orbit">
+
+            <div class="loader-center">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <i></i>
+
+            </div>
 
         </div>
 
 
-        <!-- Sparkles -->
-
-        <div class="intro-sparkles">
-
-            <span>✦</span>
-            <span>✧</span>
-            <span>⋆</span>
-            <span>✦</span>
-            <span>✧</span>
-            <span>✦</span>
-            <span>⋆</span>
-
+        <div class="loader-title">
+            KIM DOKJA
         </div>
 
 
-        <!-- Giant candies -->
-
-        <div class="intro-candy candy-left">
-
-            🍭
-
+        <div class="loader-sub">
+            OPENING THE STORY...
         </div>
 
 
-        <div class="intro-candy candy-right">
-
-            🍬
-
-        </div>
-
-
-        <!-- Main intro -->
-
-        <div class="intro-content">
-
-
-            <div class="intro-orbit">
-
-                <span>🍓</span>
-                <span>🍭</span>
-                <span>🧁</span>
-                <span>🍰</span>
-
-            </div>
-
-
-            <div class="intro-logo">
-
-                🍰
-
-            </div>
-
-
-            <div class="intro-small">
-
-                ✦ WELCOME TO ✦
-
-            </div>
-
-
-            <h1>
-
-                Sweet
-
-                <span>
-                    Candy Gallery
-                </span>
-
-            </h1>
-
-
-            <p>
-
-                ✨ A little world full of sweetness ✨
-
-            </p>
-
-
-            <div class="intro-loading">
-
-                <div class="loading-text">
-
-                    BAKING SWEETNESS...
-
-                    <span id="loadingPercent">
-                        0%
-                    </span>
-
-                </div>
-
-
-                <div class="loading-bar">
-
-                    <div
-                        class="loading-progress"
-                        id="loadingProgress"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <button
-                class="enter-button"
-                id="enterButton"
-            >
-
-                <span>
-                    🍭
-                </span>
-
-                ENTER CANDY WORLD
-
-                <span>
-                    🍬
-                </span>
-
-            </button>
-
-
-        </div>
-
-
-        <!-- Candy floor -->
-
-        <div class="intro-floor">
-
-            <div class="floor-candy">
-                🍩
-            </div>
-
-            <div class="floor-candy">
-                🍰
-            </div>
-
-            <div class="floor-candy">
-                🧁
-            </div>
-
-            <div class="floor-candy">
-                🍭
-            </div>
-
-        </div>
-
+        <div class="loader-line"></div>
 
     </div>
-
-
-    <!-- =====================================================
-         🍬 MAIN WEBSITE
-    ====================================================== -->
-
-    <main
-        id="mainContent"
-        class="main-content"
-    >
-
-
-        <!-- =================================================
-             🌠 RANDOM CANDY STARS
-        ================================================== -->
-
-        <div
-            class="candy-sky"
-            id="candySky"
-        ></div>
-
-
-        <!-- =================================================
-             🍭 CANDY TRAIL LAYER
-        ================================================== -->
-
-        <div
-            class="trail-layer"
-            id="trailLayer"
-        ></div>
-
-
-        <!-- =================================================
-             🍰 DRIZZLE / ICING
-        ================================================== -->
-
-        <div class="drizzle drizzle-top">
-
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </div>
-
-
-        <div class="drizzle drizzle-bottom">
-
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </div>
-
-
-        <!-- =================================================
-             🍭 FLOATING CANDIES
-        ================================================== -->
-
-        <div class="floating-candy fc1">
-            🍭
-        </div>
-
-        <div class="floating-candy fc2">
-            🧁
-        </div>
-
-        <div class="floating-candy fc3">
-            🍩
-        </div>
-
-        <div class="floating-candy fc4">
-            🍰
-        </div>
-
-        <div class="floating-candy fc5">
-            🍬
-        </div>
-
-        <div class="floating-candy fc6">
-            🍪
-        </div>
-
-        <div class="floating-candy fc7">
-            🍓
-        </div>
-
-        <div class="floating-candy fc8">
-            🍫
-        </div>
-
-
-        <!-- =================================================
-             ✨ FLOATING STARS
-        ================================================== -->
-
-        <div class="floating-star fs1">
-            ✦
-        </div>
-
-        <div class="floating-star fs2">
-            ✧
-        </div>
-
-        <div class="floating-star fs3">
-            ✦
-        </div>
-
-        <div class="floating-star fs4">
-            ⋆
-        </div>
-
-
-        <!-- =================================================
-             🎀 NAVBAR
-        ================================================== -->
-
-        <nav class="navbar">
-
-
-            <div class="nav-logo">
-
-                <span>
-                    🍭
-                </span>
-
-                Sweet Gallery
-
-            </div>
-
-
-            <div class="nav-links">
-
-                <a href="#home">
-                    Home
-                </a>
-
-                <a href="#gallery">
-                    Gallery
-                </a>
-
-                <a href="#about">
-                    About
-                </a>
-
-            </div>
-
-
-            <button
-                class="theme-open"
-                id="themeOpen"
-            >
-
-                🎨
-
-                <span>
-                    Theme
-                </span>
-
-            </button>
-
-
-        </nav>
-
-
-        <!-- =================================================
-             🍰 HERO
-        ================================================== -->
-
-        <section
-            class="hero"
-            id="home"
-        >
-
-
-            <div class="hero-content">
-
-
-                <div class="hero-badge">
-
-                    🍓 MY SWEET COLLECTION 🍓
-
-                </div>
-
-
-                <h1>
-
-                    My Little
-
-                    <span>
-                        Candy World
-                    </span>
-
-                </h1>
-
-
-                <p>
-
-                    ยินดีต้อนรับเข้าสู่โลกแห่งความหวาน
-
-                    <br>
-
-                    ที่รวบรวมภาพที่ฉันชื่นชอบเอาไว้ 💗
-
-                </p>
-
-
-                <a
-                    href="#gallery"
-                    class="hero-button"
-                >
-
-                    Explore Gallery
-
-                    <span>
-                        ↓
-                    </span>
-
-                </a>
-
-
-            </div>
-
-
-            <!-- Hero decoration -->
-
-            <div class="hero-decoration">
-
-
-                <div class="hero-halo"></div>
-
-
-                <div class="orbit orbit-one">
-
-                    <span>
-                        🍭
-                    </span>
-
-                </div>
-
-
-                <div class="orbit orbit-two">
-
-                    <span>
-                        🍬
-                    </span>
-
-                </div>
-
-
-                <div class="orbit orbit-three">
-
-                    <span>
-                        🍓
-                    </span>
-
-                </div>
-
-
-                <div class="hero-cake">
-
-                    🍰
-
-                </div>
-
-
-                <div class="hero-glow"></div>
-
-
-            </div>
-
-
-            <!-- Hero ground -->
-
-            <div class="hero-ground">
-
-                <span>🍪</span>
-                <span>🍓</span>
-                <span>🧁</span>
-                <span>🍩</span>
-                <span>🍭</span>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- =================================================
-             🍬 MARQUEE
-        ================================================== -->
-
-        <div class="marquee">
-
-            <div class="marquee-track">
-
-
-                <span>
-                    🍭 SWEET MEMORIES
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-                <span>
-                    🍰 MY FAVORITE THINGS
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-                <span>
-                    🍬 CANDY WORLD
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-                <span>
-                    🍓 SWEET DREAMS
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-
-                <span>
-                    🍭 SWEET MEMORIES
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-                <span>
-                    🍰 MY FAVORITE THINGS
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-                <span>
-                    🍬 CANDY WORLD
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-                <span>
-                    🍓 SWEET DREAMS
-                </span>
-
-                <span>
-                    ✦
-                </span>
-
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             🖼️ GALLERY
-        ================================================== -->
-
-        <section
-            class="gallery-section"
-            id="gallery"
-        >
-
-
-            <div class="section-heading">
-
-
-                <div class="heading-label">
-
-                    ✦ MY COLLECTION ✦
-
-                </div>
-
-
-                <h2>
-
-                    Sweet
-
-                    <span>
-                        Gallery
-                    </span>
-
-                </h2>
-
-
-                <p>
-
-                    3 ภาพที่ฉันชื่นชอบและอยากแบ่งปัน 🍭
-
-                </p>
-
-
-            </div>
-
-
-            <div class="gallery-grid">
-
-
-                <!-- =========================================
-                     CARD 01
-                ========================================== -->
-
-                <article class="card">
-
-
-                    <div class="card-number">
-
-                        01
-
-                    </div>
-
-
-                    <button
-                        class="heart"
-                        aria-label="favorite"
-                    >
-
-                        ♡
-
-                    </button>
-
-
-                    <div class="image-box">
-
-
-                        <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk__5Y1FBo7kmr_8hbrKw7QVjaktgzf4UgbZBEqyC1LA&s=10"
-                            alt="Omniscient Reader's Viewpoint"
-                        >
-
-
-                        <div class="image-shine"></div>
-
-
-                        <div class="image-overlay">
-
-                            <span>
-                                ✦
-                            </span>
-
-                            <span>
-                                ✧
-                            </span>
-
-                            <span>
-                                ⋆
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="card-content">
-
-
-                        <div class="card-tag">
-
-                            📖 NOVEL / MANHWA
-
-                        </div>
-
-
-                        <h3>
-
-                            Omniscient Reader's
-                            Viewpoint
-
-                        </h3>
-
-
-                        <h4>
-
-                            📚 มุมมองนักอ่านพระเจ้า
-
-                        </h4>
-
-
-                        <p>
-
-                            เรื่องราวของ
-                            <b>คิมดกจา</b>
-                            ชายหนุ่มธรรมดาที่อ่านนิยาย
-                            เรื่องหนึ่งจนจบเพียงคนเดียว
-
-                            ก่อนที่โลกในนิยายจะกลายเป็น
-                            ความจริง และเขาต้องใช้ความรู้
-                            จากนิยายเพื่อเอาชีวิตรอด
-
-                        </p>
-
-
-                        <button class="view-button">
-
-                            View Memory
-
-                            <span>
-                                ↗
-                            </span>
-
-                        </button>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- =========================================
-                     CARD 02
-                ========================================== -->
-
-                <article class="card">
-
-
-                    <div class="card-number">
-
-                        02
-
-                    </div>
-
-
-                    <button
-                        class="heart"
-                        aria-label="favorite"
-                    >
-
-                        ♡
-
-                    </button>
-
-
-                    <div class="image-box">
-
-
-                        <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCyEB1GClE-7gIOSZTOw-1vfB-hHeKyW3SS_EcfRihlA&s=10"
-                            alt="KimCom"
-                        >
-
-
-                        <div class="image-shine"></div>
-
-
-                        <div class="image-overlay">
-
-                            <span>
-                                ✦
-                            </span>
-
-                            <span>
-                                ✧
-                            </span>
-
-                            <span>
-                                ⋆
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="card-content">
-
-
-                        <div class="card-tag">
-
-                            🍓 FAN ART
-
-                        </div>
-
-
-                        <h3>
-
-                            KimCom
-
-                        </h3>
-
-
-                        <h4>
-
-                            🍓 ภาพแฟนอาร์ต
-
-                        </h4>
-
-
-                        <p>
-
-                            ภาพที่เกี่ยวข้องกับ
-                            <b>KimCom</b>
-                            จากเรื่อง
-                            <b>
-                                Omniscient Reader's Viewpoint
-                            </b>
-
-                            เป็นภาพที่มีบรรยากาศ
-                            อบอุ่นและให้ความรู้สึก
-                            แตกต่างจากฉากการต่อสู้
-                            ภายในเรื่อง
-
-                        </p>
-
-
-                        <button class="view-button">
-
-                            View Memory
-
-                            <span>
-                                ↗
-                            </span>
-
-                        </button>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- =========================================
-                     CARD 03
-                ========================================== -->
-
-                <article class="card">
-
-
-                    <div class="card-number">
-
-                        03
-
-                    </div>
-
-
-                    <button
-                        class="heart"
-                        aria-label="favorite"
-                    >
-
-                        ♡
-
-                    </button>
-
-
-                    <div class="image-box">
-
-
-                        <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAqWR1xE6xUrRBRTMEEN4vFM9bj4Sott5WGxiL6LjIw&s=10"
-                            alt="Oldest Dream"
-                        >
-
-
-                        <div class="image-shine"></div>
-
-
-                        <div class="image-overlay">
-
-                            <span>
-                                ✦
-                            </span>
-
-                            <span>
-                                ✧
-                            </span>
-
-                            <span>
-                                ⋆
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="card-content">
-
-
-                        <div class="card-tag">
-
-                            🌌 OMNISCIENT READER
-
-                        </div>
-
-
-                        <h3>
-
-                            Oldest Dream
-
-                        </h3>
-
-
-                        <h4>
-
-                            🌌 ความฝันที่เก่าแก่ที่สุด
-
-                        </h4>
-
-
-                        <p>
-
-                            หนึ่งในแนวคิดสำคัญของเรื่อง
-                            <b>
-                                Omniscient Reader's Viewpoint
-                            </b>
-
-                            ผู้ที่มีบทบาทต่อเรื่องราวทั้งหมด
-                            และเป็นส่วนสำคัญของการดำเนินเรื่อง
-                            ที่เชื่อมโยงระหว่างผู้อ่าน
-                            ตัวละคร และเรื่องราว
-
-                        </p>
-
-
-                        <button class="view-button">
-
-                            View Memory
-
-                            <span>
-                                ↗
-                            </span>
-
-                        </button>
-
-
-                    </div>
-
-
-                </article>
-
-
-            </div>
-
-
-        </section>
-
-
-        <!-- =================================================
-             📚 ABOUT
-        ================================================== -->
-
-        <section
-            class="about-section"
-            id="about"
-        >
-
-
-            <div class="about-card">
-
-
-                <div class="about-candy">
-
-                    🍰
-
-                </div>
-
-
-                <div class="about-text">
-
-
-                    <div class="heading-label">
-
-                        ✦ ABOUT THIS WORLD ✦
-
-                    </div>
-
-
-                    <h2>
-
-                        A Story Told
-
-                        <span>
-                            Through Pictures
-                        </span>
-
-                    </h2>
-
-
-                    <p>
-
-                        เว็บไซต์นี้สร้างขึ้นเพื่อรวบรวม
-                        ภาพที่ฉันชื่นชอบจากเรื่องราวต่าง ๆ
-
-                        โดยใช้ธีมโลกขนมหวาน
-                        เพื่อทำให้แกลเลอรีดูสนุก
-                        น่ารัก และมีเอกลักษณ์มากขึ้น
-
-                        หนึ่งในเรื่องที่นำเสนอคือ
-                        <b>
-                            Omniscient Reader's Viewpoint
-                        </b>
-
-                        ซึ่งมีเรื่องราวเกี่ยวกับ
-                        “ผู้อ่าน”
-                        “ตัวละคร”
-                        และ
-                        “โลกในนิยาย”
-
-                    </p>
-
-
-                    <div class="tags">
-
-
-                        <span>
-                            📖 Fantasy
-                        </span>
-
-
-                        <span>
-                            🌌 Adventure
-                        </span>
-
-
-                        <span>
-                            ⚔️ Survival
-                        </span>
-
-
-                        <span>
-                            🍭 Candy
-                        </span>
-
-
-                        <span>
-                            ✨ ORV
-                        </span>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-        <!-- =================================================
-             💗 QUOTE
-        ================================================== -->
-
-        <section class="quote-section">
-
-
-            <div class="quote-card">
-
-
-                <div class="quote-sparkle">
-
-                    ✦
-
-                </div>
-
-
-                <p>
-
-                    “Every story becomes special
-                    when someone chooses to remember it.”
-
-                </p>
-
-
-                <span>
-
-                    🍰 Sweet memories · Sweet stories 🍭
-
-                </span>
-
-
-            </div>
-
-
-        </section>
-
-
-        <!-- =================================================
-             🍰 FOOTER
-        ================================================== -->
-
-        <footer>
-
-
-            <div class="footer-cloud cloud-one"></div>
-
-            <div class="footer-cloud cloud-two"></div>
-
-
-            <div class="footer-candy">
-
-                🍭
-
-            </div>
-
-
-            <h2>
-
-                Sweet Memories
-
-            </h2>
-
-
-            <p>
-
-                บางภาพอาจเป็นเพียงรูปภาพ
-
-                <br>
-
-                แต่สำหรับฉัน
-                มันคือความทรงจำที่มีความหมาย 💗
-
-            </p>
-
-
-            <div class="footer-candies">
-
-                🍭
-                🍰
-                🍩
-                🧁
-                🍬
-                🍪
-                🍓
-
-            </div>
-
-
-            <div class="footer-line"></div>
-
-
-            <small>
-
-                © 2026 Sweet Candy Gallery
-                · Created with 🍰 & ✨
-
-            </small>
-
-
-        </footer>
-
-
-    </main>
-
-
-    <!-- =====================================================
-         🎨 THEME PANEL
-    ====================================================== -->
-
-    <div
-        class="theme-panel"
-        id="themePanel"
-    >
-
-
-        <div class="theme-box">
-
-
-            <button
-                class="theme-close"
-                id="themeClose"
-            >
-
-                ×
-
-            </button>
-
-
-            <div class="theme-title">
-
-
-                <span>
-                    🎨
-                </span>
-
-
-                <div>
-
-                    <small>
-                        CHOOSE YOUR
-                    </small>
-
-                    <h2>
-                        Candy Theme
-                    </h2>
-
-                </div>
-
-
-            </div>
-
-
-            <p>
-
-                เลือกโลกขนมหวานที่คุณต้องการ 🍭
-
-            </p>
-
-
-            <div class="theme-options">
-
-
-                <button
-                    class="theme-option active"
-                    data-theme="strawberry"
-                >
-
-                    <span class="theme-icon">
-                        🍓
-                    </span>
-
-                    <span>
-                        Strawberry
-                        <small>
-                            หวานอมชมพู
-                        </small>
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="theme-option"
-                    data-theme="blueberry"
-                >
-
-                    <span class="theme-icon">
-                        🫐
-                    </span>
-
-                    <span>
-                        Blueberry
-                        <small>
-                            ฟ้าแฟนตาซี
-                        </small>
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="theme-option"
-                    data-theme="chocolate"
-                >
-
-                    <span class="theme-icon">
-                        🍫
-                    </span>
-
-                    <span>
-                        Chocolate
-                        <small>
-                            น้ำตาลโกโก้
-                        </small>
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="theme-option"
-                    data-theme="lemon"
-                >
-
-                    <span class="theme-icon">
-                        🍋
-                    </span>
-
-                    <span>
-                        Lemon
-                        <small>
-                            เหลืองสดใส
-                        </small>
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="theme-option"
-                    data-theme="cotton"
-                >
-
-                    <span class="theme-icon">
-                        🍬
-                    </span>
-
-                    <span>
-                        Cotton Candy
-                        <small>
-                            ฟูนุ่มละมุน
-                        </small>
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="theme-option"
-                    data-theme="galaxy"
-                >
-
-                    <span class="theme-icon">
-                        🌌
-                    </span>
-
-                    <span>
-                        Galaxy Candy
-                        <small>
-                            ลูกกวาดจักรวาล
-                        </small>
-                    </span>
-
-                </button>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =====================================================
-         🖼️ IMAGE MODAL
-    ====================================================== -->
-
-    <div
-        class="image-modal"
-        id="imageModal"
-    >
-
-
-        <button
-            class="modal-close"
-            id="modalClose"
-        >
-
-            ×
-
-        </button>
-
-
-        <div class="modal-inner">
-
-
-            <div class="modal-image-wrap">
-
-                <img
-                    id="largeImage"
-                    src=""
-                    alt=""
-                >
-
-            </div>
-
-
-            <div class="modal-caption">
-
-
-                <span>
-
-                    ✦ SWEET MEMORY ✦
-
-                </span>
-
-
-                <h3 id="modalTitle">
-
-                    Sweet Memory
-
-                </h3>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =====================================================
-         🖱️ CUSTOM CURSOR
-    ====================================================== -->
-
-    <div class="cursor"></div>
-
-    <div class="cursor-dot"></div>
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-    <!-- =========================================
-     🎵 SWEET CANDY MUSIC PLAYER
-========================================= -->
-
-<div class="music-player" id="musicPlayer">
-
-    <div class="music-icon">
-        🎵
-    </div>
-
-    <div class="music-info">
-
-        <div class="music-label">
-            NOW PLAYING
-        </div>
-
-        <div class="music-title">
-            Play Date
-        </div>
-
-    </div>
-
-    <button
-        class="music-toggle"
-        id="musicToggle"
-        type="button"
-        aria-label="Play music"
-    >
-        ▶
-    </button>
-
-    <audio
-    id="bgMusic"
-    preload="metadata"
-    controls
->
-    <source
-        src="./play-date.mp3"
-        type="audio/mpeg"
-    >
-    เบราว์เซอร์ไม่รองรับการเล่นเพลง
-</audio>
 
 </div>
 
-    <script src="script.js"></script>
+
+<!-- ======================================================
+     CURSOR
+====================================================== -->
+
+<div
+    class="cursor-flower"
+    id="cursorFlower"
+>
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+    <i></i>
+
+</div>
+
+
+<!-- ======================================================
+     CONTROLS
+====================================================== -->
+
+<div class="controls">
+
+    <button
+        class="control"
+        id="worldBtn"
+        title="เปลี่ยนบรรยากาศ"
+    >
+        🌸
+    </button>
+
+
+    <button
+        class="control"
+        id="musicBtn"
+        title="เสียงบรรยากาศ"
+    >
+        ♪
+    </button>
+
+</div>
+
+
+<div
+    class="theme-flash"
+    id="themeFlash"
+></div>
+
+
+<!-- ======================================================
+     WORLD
+====================================================== -->
+
+<main
+    class="world"
+    id="world"
+>
+
+
+    <div class="atmosphere"></div>
+
+
+    <!-- SKY -->
+
+    <div class="sky" id="sky">
+
+        <div class="moon"></div>
+
+        <div
+            class="cloud one"
+        ></div>
+
+        <div
+            class="cloud two"
+        ></div>
+
+
+        <div class="floating-island one"></div>
+
+        <div class="floating-island two"></div>
+
+    </div>
+
+
+    <!-- MOUNTAINS -->
+
+    <div class="mountains">
+
+        <div class="mountain m1"></div>
+
+        <div class="mountain m2"></div>
+
+        <div class="mountain m3"></div>
+
+        <div class="mountain m4"></div>
+
+        <div class="mountain m5"></div>
+
+    </div>
+
+
+    <div class="mountain-fog"></div>
+
+
+    <!-- CASTLE -->
+
+    <div class="castle">
+
+
+        <div class="tower left"></div>
+
+        <div class="tower right"></div>
+
+
+        <div class="castle-body">
+
+            <div class="castle-window w1"></div>
+
+            <div class="castle-window w2"></div>
+
+            <div class="castle-door"></div>
+
+        </div>
+
+
+        <div class="castle-center">
+
+            <div class="castle-window"
+                 style="
+                    left:50%;
+                    bottom:155px;
+                    transform:translateX(-50%);
+                 ">
+            </div>
+
+        </div>
+
+
+        <div class="castle-light l1"></div>
+
+        <div class="castle-light l2"></div>
+
+        <div class="castle-light l3"></div>
+
+    </div>
+
+
+    <!-- HORIZON -->
+
+    <div class="horizon"></div>
+
+    <div class="fog"></div>
+
+
+    <!-- HERO -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+
+        <div class="orb o1"></div>
+
+        <div class="orb o2"></div>
+
+        <div class="orb o3"></div>
+
+        <div class="orb o4"></div>
+
+
+        <div class="hero-content">
+
+
+            <div class="hero-decoration">
+                ✦ WELCOME TO THE STORY ✦
+            </div>
+
+
+            <h1 class="hero-title">
+                Kim Dokja
+            </h1>
+
+
+            <div class="title-line"></div>
+
+
+            <p class="hero-desc">
+
+                ชายหนุ่มธรรมดาที่อ่านนิยายเรื่องหนึ่ง
+                จนจบเพียงคนเดียว<br>
+
+                ก่อนที่โลกในนิยายจะกลายเป็นความจริง
+                และเขาต้องใช้ความรู้จากนิยายเพื่อเอาชีวิตรอด
+
+            </p>
+
+
+            <a
+                href="#gallery"
+                class="story-button"
+            >
+
+                ✦ เปิดประตูสู่แกลเลอรี ✦
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- MEADOW -->
+
+    <div
+        class="meadow"
+        id="meadow"
+    ></div>
+
+
+    <div class="foreground"></div>
+
+
+    <!-- CREATURES -->
+
+    <div class="creature butterfly">
+        🦋
+    </div>
+
+    <div class="creature butterfly two">
+        🦋
+    </div>
+
+    <div class="creature butterfly three">
+        🦋
+    </div>
+
+
+    <!-- PETALS -->
+
+    <div
+        class="petals"
+        id="petals"
+    ></div>
+
+
+</main>
+
+
+<!-- ======================================================
+     GALLERY
+====================================================== -->
+
+<section
+    class="gallery-section"
+    id="gallery"
+>
+
+
+    <h2 class="section-title">
+        My Gallery
+    </h2>
+
+
+    <p class="section-sub">
+        เรื่องราวจากโลกของ Omniscient Reader
+    </p>
+
+
+    <div class="gallery">
+
+
+        <!-- CARD 1 -->
+
+        <article class="card">
+
+
+            <div class="card-image">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQ0JK1E2Kco34ND9uMKlLjxTmya-QATPvPHj8kEfMTQ&s=10"
+                    alt="Kim Dokja"
+                >
+
+                <div class="image-shine"></div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <h3>
+                    ✿ Kim Dokja
+                </h3>
+
+
+                <p>
+
+                    ชายหนุ่มธรรมดาที่อ่านนิยายเรื่องหนึ่ง
+                    จนจบเพียงคนเดียว ก่อนที่โลกในนิยายจะ
+                    กลายเป็นความจริง และเขาต้องใช้ความรู้
+                    จากนิยายเพื่อเอาชีวิตรอด
+
+                </p>
+
+
+                <span class="card-tag">
+                    THE READER
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- CARD 2 -->
+
+        <article class="card">
+
+
+            <div class="card-image">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2LDrC0tpvYwP2F12CIMpZA9yhdQUQXBuYRsR-Y8glw&s=10"
+                    alt="KimCom"
+                >
+
+                <div class="image-shine"></div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <h3>
+                    ✿ KimCom
+                </h3>
+
+
+                <p>
+
+                    เป็นภาพที่มีบรรยากาศอบอุ่น
+                    และให้ความรู้สึกแตกต่างจาก
+                    ฉากการต่อสู้ภายในเรื่อง
+
+                </p>
+
+
+                <span class="card-tag">
+                    KIM DOKJA COMPANY
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- CARD 3 -->
+
+        <article class="card">
+
+
+            <div class="card-image">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAqWR1xE6xUrRBRTMEEN4vFM9bj4Sott5WGxiL6LjIw&s=10"
+                    alt="Oldest Dream"
+                >
+
+                <div class="image-shine"></div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <h3>
+                    ✿ Oldest Dream
+                </h3>
+
+
+                <p>
+
+                    ผู้ที่มีบทบาทต่อเรื่องราวทั้งหมด
+                    และเป็นส่วนสำคัญของการดำเนินเรื่อง
+                    ที่เชื่อมโยงระหว่างผู้อ่าน ตัวละคร
+                    และเรื่องราว
+
+                </p>
+
+
+                <span class="card-tag">
+                    THE DREAM
+                </span>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     TIMELINE
+====================================================== -->
+
+<section class="timeline-section">
+
+
+    <h2 class="section-title">
+        Story Timeline
+    </h2>
+
+
+    <p class="section-sub">
+
+        เส้นทางของ Kim Dokja...
+        จากการเป็นผู้อ่าน
+        จนกลายเป็นส่วนหนึ่งของเรื่อง
+
+    </p>
+
+
+    <div class="timeline">
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-box">
+
+                <div class="chapter">
+                    CHAPTER 01
+                </div>
+
+                <h3>
+                    The Reader
+                </h3>
+
+                <p>
+                    จุดเริ่มต้นของชายหนุ่มธรรมดา
+                    ผู้เป็นเพียงคนเดียวที่อ่านนิยาย
+                    เรื่องนี้จนจบ
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-box">
+
+                <div class="chapter">
+                    CHAPTER 02
+                </div>
+
+                <h3>
+                    The Scenario
+                </h3>
+
+                <p>
+                    โลกที่เคยเป็นเพียงเรื่องราว
+                    กลายเป็นความจริงตรงหน้า
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-box">
+
+                <div class="chapter">
+                    CHAPTER 03
+                </div>
+
+                <h3>
+                    Kim Dokja Company
+                </h3>
+
+                <p>
+                    จากคนคนเดียว กลายเป็นกลุ่มคน
+                    ที่ร่วมเดินทางผ่านเรื่องราว
+                    ไปด้วยกัน
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-box">
+
+                <div class="chapter">
+                    CHAPTER 04
+                </div>
+
+                <h3>
+                    The Oldest Dream
+                </h3>
+
+                <p>
+                    ความฝันที่อยู่เบื้องหลังเรื่องราว
+                    และความสัมพันธ์ระหว่างผู้อ่าน
+                    กับเรื่อง
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     SECRET
+====================================================== -->
+
+<section class="secret">
+
+
+    <button
+        class="secret-button"
+        id="secretBtn"
+    >
+
+        ✦ คลิกเพื่อค้นหาความลับ ✦
+
+    </button>
+
+
+    <div
+        class="secret-text"
+        id="secretText"
+    >
+
+        “บางเรื่องราว...
+        จะยังคงมีอยู่ตราบใดที่ยังมีใครสักคนอ่านมัน”
+
+        <br><br>
+
+        — The Story Continues —
+
+    </div>
+
+
+</section>
+
+
+<!-- ======================================================
+     LIGHTBOX
+====================================================== -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+>
+
+
+    <div
+        class="lightbox-close"
+        id="lightboxClose"
+    >
+        ×
+    </div>
+
+
+    <img
+        id="lightboxImg"
+        src=""
+        alt=""
+    >
+
+</div>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <strong>
+        Kim Dokja
+    </strong>
+
+    <br><br>
+
+    A small corner of the story.
+
+    <br><br>
+
+    ✦ Every story needs a reader ✦
+
+</footer>
+
+
+<script>
+
+
+/* =========================================================
+   LOADER STARS
+========================================================= */
+
+const loaderStars=
+    document.querySelector(".loader-stars");
+
+for(let i=0;i<55;i++){
+
+    const star=
+        document.createElement("div");
+
+    star.className=
+        "loader-star";
+
+    star.style.left=
+        Math.random()*100+"%";
+
+    star.style.top=
+        Math.random()*100+"%";
+
+    star.style.animationDelay=
+        Math.random()*3+"s";
+
+    loaderStars.appendChild(star);
+
+}
+
+
+/* =========================================================
+   HIDE LOADER
+========================================================= */
+
+window.addEventListener("load",()=>{
+
+    setTimeout(()=>{
+
+        document
+            .getElementById("loader")
+            .classList.add("hide");
+
+    },3800);
+
+});
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+const sky=
+    document.getElementById("sky");
+
+for(let i=0;i<110;i++){
+
+    const star=
+        document.createElement("div");
+
+    star.className=
+        "star";
+
+    star.style.left=
+        Math.random()*100+"%";
+
+    star.style.top=
+        Math.random()*67+"%";
+
+    star.style.animationDelay=
+        Math.random()*4+"s";
+
+    star.style.opacity=
+        .2+Math.random()*.8;
+
+    sky.appendChild(star);
+
+}
+
+
+/* =========================================================
+   GRASS
+========================================================= */
+
+const meadow=
+    document.getElementById("meadow");
+
+
+for(let i=0;i<420;i++){
+
+    const grass=
+        document.createElement("div");
+
+    grass.className=
+        "grass";
+
+    grass.style.left=
+        Math.random()*100+"%";
+
+    grass.style.height=
+        25+
+        Math.random()*90+
+        "px";
+
+    grass.style.width=
+        1+
+        Math.random()*4+
+        "px";
+
+    grass.style.opacity=
+        .25+
+        Math.random()*.75;
+
+    grass.style.animationDelay=
+        Math.random()*3+
+        "s";
+
+    meadow.appendChild(grass);
+
+}
+
+
+/* =========================================================
+   FLOWERS
+========================================================= */
+
+for(let i=0;i<75;i++){
+
+    const flower=
+        document.createElement("div");
+
+    flower.className=
+        "meadow-flower";
+
+    if(i%3===0){
+        flower.classList.add(
+            "flower-small"
+        );
+    }
+
+    if(i%4===0){
+        flower.classList.add(
+            "flower-large"
+        );
+    }
+
+    flower.style.left=
+        Math.random()*100+"%";
+
+    flower.style.bottom=
+        5+
+        Math.random()*35+
+        "%";
+
+    flower.style.animationDelay=
+        Math.random()*4+
+        "s";
+
+    meadow.appendChild(flower);
+
+}
+
+
+/* =========================================================
+   FIREFLIES
+========================================================= */
+
+for(let i=0;i<55;i++){
+
+    const firefly=
+        document.createElement("div");
+
+    firefly.className=
+        "firefly";
+
+    firefly.style.left=
+        Math.random()*100+"%";
+
+    firefly.style.top=
+        20+
+        Math.random()*70+
+        "%";
+
+    firefly.style.animationDelay=
+        Math.random()*6+
+        "s";
+
+    firefly.style.animationDuration=
+        4+
+        Math.random()*6+
+        "s";
+
+    document.body.appendChild(
+        firefly
+    );
+
+}
+
+
+/* =========================================================
+   FALLING PETALS
+========================================================= */
+
+const petals=
+    document.getElementById("petals");
+
+
+function createPetal(){
+
+    const petal=
+        document.createElement("div");
+
+    petal.className=
+        "petal";
+
+    petal.style.left=
+        Math.random()*100+
+        "%";
+
+    petal.style.setProperty(
+        "--drift",
+        (-120+
+        Math.random()*240)+
+        "px"
+    );
+
+    petal.style.animationDuration=
+        6+
+        Math.random()*7+
+        "s";
+
+    petal.style.opacity=
+        .25+
+        Math.random()*.7;
+
+    petals.appendChild(
+        petal
+    );
+
+    setTimeout(
+        ()=>{
+            petal.remove();
+        },
+        14000
+    );
+
+}
+
+
+setInterval(
+    createPetal,
+    380
+);
+
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+const cursor=
+    document.getElementById(
+        "cursorFlower"
+    );
+
+document.addEventListener(
+    "mousemove",
+    e=>{
+
+        cursor.style.left=
+            e.clientX+"px";
+
+        cursor.style.top=
+            e.clientY+"px";
+
+    }
+);
+
+
+/* =========================================================
+   MOUSE FLOWER MAGIC
+========================================================= */
+
+document.addEventListener(
+    "mousemove",
+    e=>{
+
+        if(
+            e.clientY >
+            window.innerHeight*.65
+            &&
+            Math.random()>.92
+        ){
+
+            const mini=
+                document.createElement(
+                    "div"
+                );
+
+            mini.className=
+                "magic-petal";
+
+            mini.style.left=
+                e.clientX+"px";
+
+            mini.style.top=
+                e.clientY+"px";
+
+            mini.style.setProperty(
+                "--x",
+                (-25+
+                Math.random()*50)+
+                "px"
+            );
+
+            mini.style.setProperty(
+                "--y",
+                (-30+
+                Math.random()*40)+
+                "px"
+            );
+
+            document.body.appendChild(
+                mini
+            );
+
+            setTimeout(
+                ()=>{
+                    mini.remove();
+                },
+                900
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLICK MAGIC CIRCLE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    e=>{
+
+        if(
+            e.target.closest(".control") ||
+            e.target.closest(".secret-button") ||
+            e.target.closest(".lightbox-close")
+        ){
+            return;
+        }
+
+
+        const ring=
+            document.createElement(
+                "div"
+            );
+
+        ring.className=
+            "magic-ring";
+
+        ring.style.left=
+            e.clientX+"px";
+
+        ring.style.top=
+            e.clientY+"px";
+
+        document.body.appendChild(
+            ring
+        );
+
+        setTimeout(
+            ()=>{
+                ring.remove();
+            },
+            1000
+        );
+
+
+        for(let i=0;i<32;i++){
+
+            const p=
+                document.createElement(
+                    "div"
+                );
+
+            p.className=
+                "magic-petal";
+
+            p.style.left=
+                e.clientX+"px";
+
+            p.style.top=
+                e.clientY+"px";
+
+            const angle=
+                Math.random()*
+                Math.PI*2;
+
+            const distance=
+                90+
+                Math.random()*180;
+
+            p.style.setProperty(
+                "--x",
+                Math.cos(angle)*
+                distance+
+                "px"
+            );
+
+            p.style.setProperty(
+                "--y",
+                Math.sin(angle)*
+                distance+
+                "px"
+            );
+
+            document.body.appendChild(
+                p
+            );
+
+            setTimeout(
+                ()=>{
+                    p.remove();
+                },
+                1000
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CARD 3D
+========================================================= */
+
+document
+    .querySelectorAll(".card")
+    .forEach(card=>{
+
+
+        card.addEventListener(
+            "mousemove",
+            e=>{
+
+                const rect=
+                    card.getBoundingClientRect();
+
+                const x=
+                    e.clientX-
+                    rect.left;
+
+                const y=
+                    e.clientY-
+                    rect.top;
+
+                const rotateY=
+                    (x/rect.width-.5)*
+                    14;
+
+                const rotateX=
+                    -(y/rect.height-.5)*
+                    14;
+
+                card.style.transform=
+                    `perspective(1000px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-8px)`;
+
+                card.style.boxShadow=
+                    `
+                    0 40px 100px
+                    rgba(210,160,255,.25)
+                    `;
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            ()=>{
+
+                card.style.transform=
+                    `
+                    perspective(1000px)
+                    rotateX(0)
+                    rotateY(0)
+                    `;
+
+                card.style.boxShadow=
+                    `
+                    0 30px 75px
+                    rgba(0,0,0,.45)
+                    `;
+
+            }
+        );
+
+
+    });
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+const lightbox=
+    document.getElementById(
+        "lightbox"
+    );
+
+const lightboxImg=
+    document.getElementById(
+        "lightboxImg"
+    );
+
+
+document
+    .querySelectorAll(
+        ".card-image img"
+    )
+    .forEach(img=>{
+
+        img.addEventListener(
+            "click",
+            ()=>{
+
+                lightboxImg.src=
+                    img.src;
+
+                lightbox.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+    });
+
+
+document
+    .getElementById(
+        "lightboxClose"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+
+            lightbox.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+lightbox.addEventListener(
+    "click",
+    e=>{
+
+        if(e.target===lightbox){
+
+            lightbox.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SMOOTH THEME SWITCH
+========================================================= */
+
+const world=
+    document.getElementById(
+        "world"
+    );
+
+const worldBtn=
+    document.getElementById(
+        "worldBtn"
+    );
+
+const themeFlash=
+    document.getElementById(
+        "themeFlash"
+    );
+
+let theme=0;
+
+
+worldBtn.addEventListener(
+    "click",
+    ()=>{
+
+        themeFlash.classList.remove(
+            "play"
+        );
+
+        void themeFlash.offsetWidth;
+
+        themeFlash.classList.add(
+            "play"
+        );
+
+
+        theme++;
+
+
+        if(theme===1){
+
+            world.classList.remove(
+                "night"
+            );
+
+            world.classList.add(
+                "sunset"
+            );
+
+            worldBtn.textContent=
+                "🌇";
+
+        }
+
+
+        else if(theme===2){
+
+            world.classList.remove(
+                "sunset"
+            );
+
+            world.classList.add(
+                "night"
+            );
+
+            worldBtn.textContent=
+                "🌙";
+
+        }
+
+
+        else{
+
+            world.classList.remove(
+                "sunset",
+                "night"
+            );
+
+            worldBtn.textContent=
+                "🌸";
+
+            theme=0;
+
+        }
+
+
+        /*
+          burst particles ตอนเปลี่ยนธีม
+        */
+
+        for(let i=0;i<25;i++){
+
+            const p=
+                document.createElement(
+                    "div"
+                );
+
+            p.className=
+                "magic-petal";
+
+            p.style.left=
+                "50%";
+
+            p.style.top=
+                "45%";
+
+            const angle=
+                Math.random()*
+                Math.PI*2;
+
+            const distance=
+                80+
+                Math.random()*250;
+
+            p.style.setProperty(
+                "--x",
+                Math.cos(angle)*
+                distance+
+                "px"
+            );
+
+            p.style.setProperty(
+                "--y",
+                Math.sin(angle)*
+                distance+
+                "px"
+            );
+
+            document.body.appendChild(
+                p
+            );
+
+            setTimeout(
+                ()=>{
+                    p.remove();
+                },
+                1000
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SECRET
+========================================================= */
+
+const secretBtn=
+    document.getElementById(
+        "secretBtn"
+    );
+
+const secretText=
+    document.getElementById(
+        "secretText"
+    );
+
+
+secretBtn.addEventListener(
+    "click",
+    ()=>{
+
+        secretText.classList.toggle(
+            "show"
+        );
+
+        if(
+            secretText.classList.contains(
+                "show"
+            )
+        ){
+
+            secretBtn.textContent=
+                "✦ คุณพบความลับแล้ว ✦";
+
+        }else{
+
+            secretBtn.textContent=
+                "✦ คลิกเพื่อค้นหาความลับ ✦";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RANDOM MAGIC SPARKS
+========================================================= */
+
+setInterval(
+    ()=>{
+
+        const spark=
+            document.createElement(
+                "div"
+            );
+
+        spark.style.position=
+            "fixed";
+
+        spark.style.left=
+            5+
+            Math.random()*90+
+            "%";
+
+        spark.style.top=
+            15+
+            Math.random()*70+
+            "%";
+
+        spark.style.width=
+            "4px";
+
+        spark.style.height=
+            "4px";
+
+        spark.style.borderRadius=
+            "50%";
+
+        spark.style.background=
+            "white";
+
+        spark.style.boxShadow=
+            `
+            0 0 10px white,
+            0 0 25px #e7b0ff
+            `;
+
+        spark.style.zIndex=
+            "20";
+
+        spark.style.pointerEvents=
+            "none";
+
+        document.body.appendChild(
+            spark
+        );
+
+
+        spark.animate(
+            [
+                {
+                    opacity:0,
+                    transform:
+                        "scale(.2)"
+                },
+                {
+                    opacity:1,
+                    transform:
+                        "scale(2)"
+                },
+                {
+                    opacity:0,
+                    transform:
+                        "scale(.2)"
+                }
+            ],
+            {
+                duration:1700
+            }
+        );
+
+
+        setTimeout(
+            ()=>{
+                spark.remove();
+            },
+            1700
+        );
+
+    },
+    500
+);
+
+
+/* =========================================================
+   SECRET KEYWORD
+========================================================= */
+
+let typed="";
+
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        typed+=
+            e.key.toLowerCase();
+
+        typed=
+            typed.slice(-10);
+
+
+        if(
+            typed.includes("dokja")
+        ){
+
+            for(let i=0;i<60;i++){
+
+                createPetal();
+
+            }
+
+            typed="";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AMBIENT MUSIC
+========================================================= */
+
+let audioContext=null;
+
+let masterGain=null;
+
+let musicOn=false;
+
+let musicTimer=null;
+
+
+const musicBtn=
+    document.getElementById(
+        "musicBtn"
+    );
+
+
+function startMusic(){
+
+    if(musicOn===false)
+        return;
+
+
+    audioContext=
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+
+    masterGain=
+        audioContext.createGain();
+
+    masterGain.gain.value=
+        .025;
+
+    masterGain.connect(
+        audioContext.destination
+    );
+
+
+    const notes=[
+        261.63,
+        329.63,
+        392,
+        523.25
+    ];
+
+
+    let index=0;
+
+
+    function note(){
+
+        if(!musicOn)
+            return;
+
+
+        const osc=
+            audioContext.createOscillator();
+
+        const gain=
+            audioContext.createGain();
+
+
+        osc.type=
+            "sine";
+
+
+        osc.frequency.value=
+            notes[
+                index%
+                notes.length
+            ];
+
+
+        gain.gain.setValueAtTime(
+            0,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.linearRampToValueAtTime(
+            .7,
+            audioContext.currentTime+.5
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audioContext.currentTime+3
+        );
+
+
+        osc.connect(gain);
+
+        gain.connect(
+            masterGain
+        );
+
+
+        osc.start();
+
+        osc.stop(
+            audioContext.currentTime+3
+        );
+
+
+        index++;
+
+
+        musicTimer=
+            setTimeout(
+                note,
+                1800
+            );
+
+    }
+
+
+    note();
+
+}
+
+
+musicBtn.addEventListener(
+    "click",
+    ()=>{
+
+        if(!musicOn){
+
+            musicOn=true;
+
+            startMusic();
+
+            musicBtn.textContent=
+                "♫";
+
+        }
+
+        else{
+
+            musicOn=false;
+
+            clearTimeout(
+                musicTimer
+            );
+
+            if(audioContext){
+
+                audioContext.close();
+
+                audioContext=null;
+
+            }
+
+            musicBtn.textContent=
+                "♪";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CARD SCROLL REVEAL
+========================================================= */
+
+const revealObserver=
+    new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(
+                entry=>{
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target.animate(
+                            [
+                                {
+                                    opacity:0,
+                                    transform:
+                                        "translateY(60px)"
+                                },
+                                {
+                                    opacity:1,
+                                    transform:
+                                        "translateY(0)"
+                                }
+                            ],
+                            {
+                                duration:1000,
+                                easing:
+                                    "cubic-bezier(.2,.8,.2,1)",
+                                fill:"forwards"
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.15
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        ".card,.timeline-box"
+    )
+    .forEach(
+        element=>
+            revealObserver.observe(
+                element
+            )
+    );
+
+
+</script>
 
 
 </body>
-
 </html>
