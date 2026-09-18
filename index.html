@@ -1,3 +1,1469 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Sweet Candy Gallery 🍭
+    </title>
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         🍰 GRAND LOADING / INTRO SCREEN
+    ====================================================== -->
+
+    <div
+        class="intro"
+        id="intro"
+    >
+
+
+        <!-- Background glow -->
+
+        <div class="intro-glow glow-one"></div>
+
+        <div class="intro-glow glow-two"></div>
+
+        <div class="intro-glow glow-three"></div>
+
+
+        <!-- Falling candy -->
+
+        <div class="intro-rain">
+
+            <span>🍭</span>
+            <span>🍬</span>
+            <span>🍰</span>
+            <span>🧁</span>
+            <span>🍩</span>
+            <span>🍪</span>
+            <span>🍓</span>
+            <span>✨</span>
+            <span>💗</span>
+            <span>⭐</span>
+
+        </div>
+
+
+        <!-- Sparkles -->
+
+        <div class="intro-sparkles">
+
+            <span>✦</span>
+            <span>✧</span>
+            <span>⋆</span>
+            <span>✦</span>
+            <span>✧</span>
+            <span>✦</span>
+            <span>⋆</span>
+
+        </div>
+
+
+        <!-- Giant candies -->
+
+        <div class="intro-candy candy-left">
+
+            🍭
+
+        </div>
+
+
+        <div class="intro-candy candy-right">
+
+            🍬
+
+        </div>
+
+
+        <!-- Main intro -->
+
+        <div class="intro-content">
+
+
+            <div class="intro-orbit">
+
+                <span>🍓</span>
+                <span>🍭</span>
+                <span>🧁</span>
+                <span>🍰</span>
+
+            </div>
+
+
+            <div class="intro-logo">
+
+                🍰
+
+            </div>
+
+
+            <div class="intro-small">
+
+                ✦ WELCOME TO ✦
+
+            </div>
+
+
+            <h1>
+
+                Sweet
+
+                <span>
+                    Candy Gallery
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                ✨ A little world full of sweetness ✨
+
+            </p>
+
+
+            <div class="intro-loading">
+
+                <div class="loading-text">
+
+                    BAKING SWEETNESS...
+
+                    <span id="loadingPercent">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="loading-bar">
+
+                    <div
+                        class="loading-progress"
+                        id="loadingProgress"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="enter-button"
+                id="enterButton"
+            >
+
+                <span>
+                    🍭
+                </span>
+
+                ENTER CANDY WORLD
+
+                <span>
+                    🍬
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+        <!-- Candy floor -->
+
+        <div class="intro-floor">
+
+            <div class="floor-candy">
+                🍩
+            </div>
+
+            <div class="floor-candy">
+                🍰
+            </div>
+
+            <div class="floor-candy">
+                🧁
+            </div>
+
+            <div class="floor-candy">
+                🍭
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         🍬 MAIN WEBSITE
+    ====================================================== -->
+
+    <main
+        id="mainContent"
+        class="main-content"
+    >
+
+
+        <!-- =================================================
+             🌠 RANDOM CANDY STARS
+        ================================================== -->
+
+        <div
+            class="candy-sky"
+            id="candySky"
+        ></div>
+
+
+        <!-- =================================================
+             🍭 CANDY TRAIL LAYER
+        ================================================== -->
+
+        <div
+            class="trail-layer"
+            id="trailLayer"
+        ></div>
+
+
+        <!-- =================================================
+             🍰 DRIZZLE / ICING
+        ================================================== -->
+
+        <div class="drizzle drizzle-top">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+
+        <div class="drizzle drizzle-bottom">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+
+        <!-- =================================================
+             🍭 FLOATING CANDIES
+        ================================================== -->
+
+        <div class="floating-candy fc1">
+            🍭
+        </div>
+
+        <div class="floating-candy fc2">
+            🧁
+        </div>
+
+        <div class="floating-candy fc3">
+            🍩
+        </div>
+
+        <div class="floating-candy fc4">
+            🍰
+        </div>
+
+        <div class="floating-candy fc5">
+            🍬
+        </div>
+
+        <div class="floating-candy fc6">
+            🍪
+        </div>
+
+        <div class="floating-candy fc7">
+            🍓
+        </div>
+
+        <div class="floating-candy fc8">
+            🍫
+        </div>
+
+
+        <!-- =================================================
+             ✨ FLOATING STARS
+        ================================================== -->
+
+        <div class="floating-star fs1">
+            ✦
+        </div>
+
+        <div class="floating-star fs2">
+            ✧
+        </div>
+
+        <div class="floating-star fs3">
+            ✦
+        </div>
+
+        <div class="floating-star fs4">
+            ⋆
+        </div>
+
+
+        <!-- =================================================
+             🎀 NAVBAR
+        ================================================== -->
+
+        <nav class="navbar">
+
+
+            <div class="nav-logo">
+
+                <span>
+                    🍭
+                </span>
+
+                Sweet Gallery
+
+            </div>
+
+
+            <div class="nav-links">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#gallery">
+                    Gallery
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+            </div>
+
+
+            <button
+                class="theme-open"
+                id="themeOpen"
+            >
+
+                🎨
+
+                <span>
+                    Theme
+                </span>
+
+            </button>
+
+
+        </nav>
+
+
+        <!-- =================================================
+             🍰 HERO
+        ================================================== -->
+
+        <section
+            class="hero"
+            id="home"
+        >
+
+
+            <div class="hero-content">
+
+
+                <div class="hero-badge">
+
+                    🍓 MY SWEET COLLECTION 🍓
+
+                </div>
+
+
+                <h1>
+
+                    My Little
+
+                    <span>
+                        Candy World
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    ยินดีต้อนรับเข้าสู่โลกแห่งความหวาน
+
+                    <br>
+
+                    ที่รวบรวมภาพที่ฉันชื่นชอบเอาไว้ 💗
+
+                </p>
+
+
+                <a
+                    href="#gallery"
+                    class="hero-button"
+                >
+
+                    Explore Gallery
+
+                    <span>
+                        ↓
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+            <!-- Hero decoration -->
+
+            <div class="hero-decoration">
+
+
+                <div class="hero-halo"></div>
+
+
+                <div class="orbit orbit-one">
+
+                    <span>
+                        🍭
+                    </span>
+
+                </div>
+
+
+                <div class="orbit orbit-two">
+
+                    <span>
+                        🍬
+                    </span>
+
+                </div>
+
+
+                <div class="orbit orbit-three">
+
+                    <span>
+                        🍓
+                    </span>
+
+                </div>
+
+
+                <div class="hero-cake">
+
+                    🍰
+
+                </div>
+
+
+                <div class="hero-glow"></div>
+
+
+            </div>
+
+
+            <!-- Hero ground -->
+
+            <div class="hero-ground">
+
+                <span>🍪</span>
+                <span>🍓</span>
+                <span>🧁</span>
+                <span>🍩</span>
+                <span>🍭</span>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             🍬 MARQUEE
+        ================================================== -->
+
+        <div class="marquee">
+
+            <div class="marquee-track">
+
+
+                <span>
+                    🍭 SWEET MEMORIES
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+                <span>
+                    🍰 MY FAVORITE THINGS
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+                <span>
+                    🍬 CANDY WORLD
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+                <span>
+                    🍓 SWEET DREAMS
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+
+                <span>
+                    🍭 SWEET MEMORIES
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+                <span>
+                    🍰 MY FAVORITE THINGS
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+                <span>
+                    🍬 CANDY WORLD
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+                <span>
+                    🍓 SWEET DREAMS
+                </span>
+
+                <span>
+                    ✦
+                </span>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             🖼️ GALLERY
+        ================================================== -->
+
+        <section
+            class="gallery-section"
+            id="gallery"
+        >
+
+
+            <div class="section-heading">
+
+
+                <div class="heading-label">
+
+                    ✦ MY COLLECTION ✦
+
+                </div>
+
+
+                <h2>
+
+                    Sweet
+
+                    <span>
+                        Gallery
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    3 ภาพที่ฉันชื่นชอบและอยากแบ่งปัน 🍭
+
+                </p>
+
+
+            </div>
+
+
+            <div class="gallery-grid">
+
+
+                <!-- =========================================
+                     CARD 01
+                ========================================== -->
+
+                <article class="card">
+
+
+                    <div class="card-number">
+
+                        01
+
+                    </div>
+
+
+                    <button
+                        class="heart"
+                        aria-label="favorite"
+                    >
+
+                        ♡
+
+                    </button>
+
+
+                    <div class="image-box">
+
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk__5Y1FBo7kmr_8hbrKw7QVjaktgzf4UgbZBEqyC1LA&s=10"
+                            alt="Omniscient Reader's Viewpoint"
+                        >
+
+
+                        <div class="image-shine"></div>
+
+
+                        <div class="image-overlay">
+
+                            <span>
+                                ✦
+                            </span>
+
+                            <span>
+                                ✧
+                            </span>
+
+                            <span>
+                                ⋆
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="card-content">
+
+
+                        <div class="card-tag">
+
+                            📖 NOVEL / MANHWA
+
+                        </div>
+
+
+                        <h3>
+
+                            Omniscient Reader's
+                            Viewpoint
+
+                        </h3>
+
+
+                        <h4>
+
+                            📚 มุมมองนักอ่านพระเจ้า
+
+                        </h4>
+
+
+                        <p>
+
+                            เรื่องราวของ
+                            <b>คิมดกจา</b>
+                            ชายหนุ่มธรรมดาที่อ่านนิยาย
+                            เรื่องหนึ่งจนจบเพียงคนเดียว
+
+                            ก่อนที่โลกในนิยายจะกลายเป็น
+                            ความจริง และเขาต้องใช้ความรู้
+                            จากนิยายเพื่อเอาชีวิตรอด
+
+                        </p>
+
+
+                        <button class="view-button">
+
+                            View Memory
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- =========================================
+                     CARD 02
+                ========================================== -->
+
+                <article class="card">
+
+
+                    <div class="card-number">
+
+                        02
+
+                    </div>
+
+
+                    <button
+                        class="heart"
+                        aria-label="favorite"
+                    >
+
+                        ♡
+
+                    </button>
+
+
+                    <div class="image-box">
+
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCyEB1GClE-7gIOSZTOw-1vfB-hHeKyW3SS_EcfRihlA&s=10"
+                            alt="KimCom"
+                        >
+
+
+                        <div class="image-shine"></div>
+
+
+                        <div class="image-overlay">
+
+                            <span>
+                                ✦
+                            </span>
+
+                            <span>
+                                ✧
+                            </span>
+
+                            <span>
+                                ⋆
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="card-content">
+
+
+                        <div class="card-tag">
+
+                            🍓 FAN ART
+
+                        </div>
+
+
+                        <h3>
+
+                            KimCom
+
+                        </h3>
+
+
+                        <h4>
+
+                            🍓 ภาพแฟนอาร์ต
+
+                        </h4>
+
+
+                        <p>
+
+                            ภาพที่เกี่ยวข้องกับ
+                            <b>KimCom</b>
+                            จากเรื่อง
+                            <b>
+                                Omniscient Reader's Viewpoint
+                            </b>
+
+                            เป็นภาพที่มีบรรยากาศ
+                            อบอุ่นและให้ความรู้สึก
+                            แตกต่างจากฉากการต่อสู้
+                            ภายในเรื่อง
+
+                        </p>
+
+
+                        <button class="view-button">
+
+                            View Memory
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- =========================================
+                     CARD 03
+                ========================================== -->
+
+                <article class="card">
+
+
+                    <div class="card-number">
+
+                        03
+
+                    </div>
+
+
+                    <button
+                        class="heart"
+                        aria-label="favorite"
+                    >
+
+                        ♡
+
+                    </button>
+
+
+                    <div class="image-box">
+
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAqWR1xE6xUrRBRTMEEN4vFM9bj4Sott5WGxiL6LjIw&s=10"
+                            alt="Oldest Dream"
+                        >
+
+
+                        <div class="image-shine"></div>
+
+
+                        <div class="image-overlay">
+
+                            <span>
+                                ✦
+                            </span>
+
+                            <span>
+                                ✧
+                            </span>
+
+                            <span>
+                                ⋆
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="card-content">
+
+
+                        <div class="card-tag">
+
+                            🌌 OMNISCIENT READER
+
+                        </div>
+
+
+                        <h3>
+
+                            Oldest Dream
+
+                        </h3>
+
+
+                        <h4>
+
+                            🌌 ความฝันที่เก่าแก่ที่สุด
+
+                        </h4>
+
+
+                        <p>
+
+                            หนึ่งในแนวคิดสำคัญของเรื่อง
+                            <b>
+                                Omniscient Reader's Viewpoint
+                            </b>
+
+                            ผู้ที่มีบทบาทต่อเรื่องราวทั้งหมด
+                            และเป็นส่วนสำคัญของการดำเนินเรื่อง
+                            ที่เชื่อมโยงระหว่างผู้อ่าน
+                            ตัวละคร และเรื่องราว
+
+                        </p>
+
+
+                        <button class="view-button">
+
+                            View Memory
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             📚 ABOUT
+        ================================================== -->
+
+        <section
+            class="about-section"
+            id="about"
+        >
+
+
+            <div class="about-card">
+
+
+                <div class="about-candy">
+
+                    🍰
+
+                </div>
+
+
+                <div class="about-text">
+
+
+                    <div class="heading-label">
+
+                        ✦ ABOUT THIS WORLD ✦
+
+                    </div>
+
+
+                    <h2>
+
+                        A Story Told
+
+                        <span>
+                            Through Pictures
+                        </span>
+
+                    </h2>
+
+
+                    <p>
+
+                        เว็บไซต์นี้สร้างขึ้นเพื่อรวบรวม
+                        ภาพที่ฉันชื่นชอบจากเรื่องราวต่าง ๆ
+
+                        โดยใช้ธีมโลกขนมหวาน
+                        เพื่อทำให้แกลเลอรีดูสนุก
+                        น่ารัก และมีเอกลักษณ์มากขึ้น
+
+                        หนึ่งในเรื่องที่นำเสนอคือ
+                        <b>
+                            Omniscient Reader's Viewpoint
+                        </b>
+
+                        ซึ่งมีเรื่องราวเกี่ยวกับ
+                        “ผู้อ่าน”
+                        “ตัวละคร”
+                        และ
+                        “โลกในนิยาย”
+
+                    </p>
+
+
+                    <div class="tags">
+
+
+                        <span>
+                            📖 Fantasy
+                        </span>
+
+
+                        <span>
+                            🌌 Adventure
+                        </span>
+
+
+                        <span>
+                            ⚔️ Survival
+                        </span>
+
+
+                        <span>
+                            🍭 Candy
+                        </span>
+
+
+                        <span>
+                            ✨ ORV
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             💗 QUOTE
+        ================================================== -->
+
+        <section class="quote-section">
+
+
+            <div class="quote-card">
+
+
+                <div class="quote-sparkle">
+
+                    ✦
+
+                </div>
+
+
+                <p>
+
+                    “Every story becomes special
+                    when someone chooses to remember it.”
+
+                </p>
+
+
+                <span>
+
+                    🍰 Sweet memories · Sweet stories 🍭
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             🍰 FOOTER
+        ================================================== -->
+
+        <footer>
+
+
+            <div class="footer-cloud cloud-one"></div>
+
+            <div class="footer-cloud cloud-two"></div>
+
+
+            <div class="footer-candy">
+
+                🍭
+
+            </div>
+
+
+            <h2>
+
+                Sweet Memories
+
+            </h2>
+
+
+            <p>
+
+                บางภาพอาจเป็นเพียงรูปภาพ
+
+                <br>
+
+                แต่สำหรับฉัน
+                มันคือความทรงจำที่มีความหมาย 💗
+
+            </p>
+
+
+            <div class="footer-candies">
+
+                🍭
+                🍰
+                🍩
+                🧁
+                🍬
+                🍪
+                🍓
+
+            </div>
+
+
+            <div class="footer-line"></div>
+
+
+            <small>
+
+                © 2026 Sweet Candy Gallery
+                · Created with 🍰 & ✨
+
+            </small>
+
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         🎨 THEME PANEL
+    ====================================================== -->
+
+    <div
+        class="theme-panel"
+        id="themePanel"
+    >
+
+
+        <div class="theme-box">
+
+
+            <button
+                class="theme-close"
+                id="themeClose"
+            >
+
+                ×
+
+            </button>
+
+
+            <div class="theme-title">
+
+
+                <span>
+                    🎨
+                </span>
+
+
+                <div>
+
+                    <small>
+                        CHOOSE YOUR
+                    </small>
+
+                    <h2>
+                        Candy Theme
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+            <p>
+
+                เลือกโลกขนมหวานที่คุณต้องการ 🍭
+
+            </p>
+
+
+            <div class="theme-options">
+
+
+                <button
+                    class="theme-option active"
+                    data-theme="strawberry"
+                >
+
+                    <span class="theme-icon">
+                        🍓
+                    </span>
+
+                    <span>
+                        Strawberry
+                        <small>
+                            หวานอมชมพู
+                        </small>
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="theme-option"
+                    data-theme="blueberry"
+                >
+
+                    <span class="theme-icon">
+                        🫐
+                    </span>
+
+                    <span>
+                        Blueberry
+                        <small>
+                            ฟ้าแฟนตาซี
+                        </small>
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="theme-option"
+                    data-theme="chocolate"
+                >
+
+                    <span class="theme-icon">
+                        🍫
+                    </span>
+
+                    <span>
+                        Chocolate
+                        <small>
+                            น้ำตาลโกโก้
+                        </small>
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="theme-option"
+                    data-theme="lemon"
+                >
+
+                    <span class="theme-icon">
+                        🍋
+                    </span>
+
+                    <span>
+                        Lemon
+                        <small>
+                            เหลืองสดใส
+                        </small>
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="theme-option"
+                    data-theme="cotton"
+                >
+
+                    <span class="theme-icon">
+                        🍬
+                    </span>
+
+                    <span>
+                        Cotton Candy
+                        <small>
+                            ฟูนุ่มละมุน
+                        </small>
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="theme-option"
+                    data-theme="galaxy"
+                >
+
+                    <span class="theme-icon">
+                        🌌
+                    </span>
+
+                    <span>
+                        Galaxy Candy
+                        <small>
+                            ลูกกวาดจักรวาล
+                        </small>
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         🖼️ IMAGE MODAL
+    ====================================================== -->
+
+    <div
+        class="image-modal"
+        id="imageModal"
+    >
+
+
+        <button
+            class="modal-close"
+            id="modalClose"
+        >
+
+            ×
+
+        </button>
+
+
+        <div class="modal-inner">
+
+
+            <div class="modal-image-wrap">
+
+                <img
+                    id="largeImage"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="modal-caption">
+
+
+                <span>
+
+                    ✦ SWEET MEMORY ✦
+
+                </span>
+
+
+                <h3 id="modalTitle">
+
+                    Sweet Memory
+
+                </h3>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         🖱️ CUSTOM CURSOR
+    ====================================================== -->
+
+    <div class="cursor"></div>
+
+    <div class="cursor-dot"></div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <!-- =========================================
+     🎵 SWEET CANDY MUSIC PLAYER
+========================================= -->
 <!-- MUSIC PLAYER -->
 
 <div class="music-player" id="musicPlayer">
@@ -42,3 +1508,10 @@
     </audio>
 
 </div>
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
