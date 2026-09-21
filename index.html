@@ -6919,9 +6919,10 @@
         🎵 เปิดเพลง
     </button>
 
-    <audio id="backgroundMusic" loop>
-        <source src="music/Earrings.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="backgroundMusic" loop preload="auto">
+    <source src="./music/Earrings.mp3" type="audio/mpeg">
+    เบราว์เซอร์ไม่รองรับการเล่นเพลง
+</audio>
 </div>
 
 <style>
@@ -6955,18 +6956,23 @@
 const music = document.getElementById("backgroundMusic");
 const button = document.getElementById("musicToggle");
 
-button.addEventListener("click", async () => {
-    try {
-        if (music.paused) {
-            await music.play();
-            button.textContent = "🔊 ปิดเพลง";
-        } else {
-            music.pause();
-            button.textContent = "🎵 เปิดเพลง";
-        }
-    } catch (error) {
-        alert("เปิดเพลงไม่ได้ กรุณาตรวจสอบไฟล์เพลง");
-        console.error(error);
+music.addEventListener("error", () => {
+    alert("ไม่พบไฟล์เพลง หรือไฟล์เพลงมีปัญหา");
+});
+
+button.addEventListener("click", () => {
+    if (music.paused) {
+        music.play()
+            .then(() => {
+                button.textContent = "🔊 ปิดเพลง";
+            })
+            .catch((error) => {
+                alert("เล่นเพลงไม่สำเร็จ: " + error.name);
+                console.log(error);
+            });
+    } else {
+        music.pause();
+        button.textContent = "🎵 เปิดเพลง";
     }
 });
 </script>
