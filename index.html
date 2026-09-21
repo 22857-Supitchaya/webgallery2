@@ -6952,20 +6952,23 @@
 </style>
 
 <script>
-    const music = document.getElementById("backgroundMusic");
-    const musicToggle = document.getElementById("musicToggle");
+const music = document.getElementById("backgroundMusic");
+const button = document.getElementById("musicToggle");
 
-    function toggleMusic() {
+button.addEventListener("click", async () => {
+    try {
         if (music.paused) {
-            music.play();
-
-            musicToggle.textContent = "🔊 ปิดเพลง";
+            await music.play();
+            button.textContent = "🔊 ปิดเพลง";
         } else {
             music.pause();
-
-            musicToggle.textContent = "🎵 เปิดเพลง";
+            button.textContent = "🎵 เปิดเพลง";
         }
+    } catch (error) {
+        alert("เปิดเพลงไม่ได้ กรุณาตรวจสอบไฟล์เพลง");
+        console.error(error);
     }
+});
 </script>
 </body>
 </html>
